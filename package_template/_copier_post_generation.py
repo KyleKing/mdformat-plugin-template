@@ -1,5 +1,7 @@
 """Post-Generation Script to be run from Copier."""
 
+# FIXME: Update for mdformat-plugin
+
 import json
 import re
 import shutil
