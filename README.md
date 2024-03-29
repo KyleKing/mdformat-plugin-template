@@ -1,6 +1,6 @@
 # mdformat Plugin Template
 
-An `mdformat` plugin template kept up to date with copier. This scaffold closely follows <https://github.com/executablebooks/mdformat-plugin> for consistency with the mdformat ecosystem, but with important updates.
+An `mdformat` plugin template kept up to date with copier. This scaffold closely follows <https://github.com/executablebooks/mdformat-plugin> for consistency with the mdformat ecosystem, but with important updates and some opinionated tooling changes.
 
 ## Quick Start
 

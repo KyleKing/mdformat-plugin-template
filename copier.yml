@@ -24,7 +24,7 @@ plugin_name:
 package_name_kebab:
   type: str
   help: Your plugin_name converted to kebab-case for URLs
-  default: "mdformat_{{ plugin_name | replace('_', '-') }}"
+  default: "mdformat-{{ plugin_name | replace('_', '-') }}"
 
 author_name:
   type: str

@@ -15,7 +15,7 @@ commands = pytest {posargs} --ff --nf -vv
 
 [testenv:py{312}-cov]
 extras = test
-commands = pytest --cov={{ package_name_py }} {posargs}
+commands = pytest --cov=mdformat_{{ plugin_name }} {posargs}
 
 [testenv:py{312}-pre-commit]
 extras = dev
@@ -27,7 +27,7 @@ commands = pre-commit run --config .pre-commit-test.yaml {posargs:--all-files --
 
 [testenv:mypy]
 deps = mypy
-commands = mypy ./{{ package_name_py }}
+commands = mypy ./mdformat_{{ plugin_name }}
 
 [testenv:ruff]
 deps = ruff
