@@ -1,47 +1,47 @@
 [build-system]
-requires = ["flit_core >=3.2.0,<4"]
 build-backend = "flit_core.buildapi"
+requires = ["flit_core >=3.2.0,<4"]
 
 [project]
-name = "mdformat_template_noop"
 authors = [
-    { name = "Kyle King", email = "dev.act.kyle@gmail.com" },
+  {email = "ctt@ctt.ctt", name = "user_ctt"},
 ]
-readme = "README.md"
 classifiers = [
-    "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python :: 3",
-    "Topic :: Software Development :: Libraries :: Python Modules",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Topic :: Software Development :: Libraries :: Python Modules",
 ]
-keywords = ["mdformat", "markdown", "markdown-it"]
-requires-python = ">=3.8.0"
 dependencies = [
-    "mdformat >= 0.7.16",
-    "mdit-py-plugins >= 0.4.0",
+  "mdformat >= 0.7.16",
+  "mdit-py-plugins >= 0.4.0",
 ]
-dynamic = ["version", "description"]
-
-[project.optional-dependencies]
-test = [
-    "pytest >= 7.4.4",
-    "pytest-cov >= 4.1.0",
-]
-dev = ["pre-commit"]
-
-[project.urls]
-Homepage = ""
+dynamic = ["description", "version"]
+keywords = ["markdown", "markdown-it", "mdformat"]
+name = "mdformat_template_noop"
+readme = "README.md"
+requires-python = ">=3.8.0"
 
 [project.entry-points."mdformat.parser_extension"]
 template_noop = "mdformat_template_noop"
 
+[project.optional-dependencies]
+dev = ["pre-commit"]
+test = [
+  "pytest >= 7.4.4",
+  "pytest-cov >= 4.1.0",
+]
+
+[project.urls]
+homepage = "https://github.com/user_ctt/mdformat-template-noop"
+
 [tool.flit.sdist]
-include = []
 exclude = [".github/", "tests/"]
+include = []
 
 [tool.pytest-watcher]
+ignore_patterns = []
 now = true
+patterns = ["*.md", "*.py"]
 runner = "tox"
 runner_args = ["-e", "py38"]
-patterns = ["*.py", "*.md"]
-ignore_patterns = []
