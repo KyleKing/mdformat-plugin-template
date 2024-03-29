@@ -5,25 +5,21 @@ _min_copier_version: 8.0.0
 _answers_file: .copier-answers.yml
 _subdirectory: package_template
 _skip_if_exists:
+  - README.md
   - LICENSE
 _tasks:
   - git init
   - python _copier_post_generation.py
 
 # ====== QUESTIONS ======
-development_branch:
+plugin_name:
   type: str
-  help: The GitHub branch name used for development
-  default: main
+  help: Your plugin name using underscores (no spaces or dashes)
 
-project_name:
+package_name_kebab:
   type: str
-  help: Your project name (can have spaces and dashes)
-
-package_name_py:
-  type: str
-  help: Your Python package name (should be in `snake_case`)
-  default: "{{ project_name | lower | replace('-', '_') | replace(' ', '_') }}"
+  help: Your plugin_name converted to kebab-case for URLs
+  default: "mdformat_{{ plugin_name | replace('_', '-') }}"
 
 project_description:
   type: str
@@ -51,31 +47,15 @@ author_username:
 
 repository_namespace:
   type: str
-  help: Your repository namespace (i.e. {{ repository_provider }}/<namespace>/{{ project_name }})
+  help: Your repository namespace (i.e. {{ repository_provider }}/<namespace>/{{ package_name_kebab }})
   default: "{{ author_username }}"
 
 repository_url:
   type: str
   help: This is an internal variable where the default should be accepted.
-  default: "{{ repository_provider }}/{{ repository_namespace }}/{{ project_name }}"
-
-repository_source_url:
-  type: str
-  help: This is an internal variable where the default should be accepted.
-  default: "{{ repository_url }}/blob/{{ development_branch }}"
+  default: "{{ repository_provider }}/{{ repository_namespace }}/{{ package_name_kebab }}"
 
 copyright_date:
   type: str
   help: The copyright year
   default: "{{ '%Y' | strftime }}"
-
-minimum_python:
-  type: str
-  help: The minimum Python version
-  default: 3.9.13
-
-minimum_python_short:
-  type: str
-  help: Two-digit version of the minimum Python
-  # FYI: {% set major,minor,patch = minimum_python.split('.') %}{{ major }}.{{ minor }}
-  default: "3.9"
