@@ -1,4 +1,4 @@
-"""Post-Generation Script to be run from Copier."""
+"""Post-Generation Script to be run from Copier."""  # noqa: INP001
 
 import json
 import re
@@ -7,8 +7,8 @@ from dataclasses import dataclass
 from pathlib import Path
 
 # Don't print any output if matching directories like:
-# /private/var/folders/1f/gd24l7210d3d8crp0clcm4440000gn/T/copier.main.update_diff.7eb725cw/.git/
-# /private/var/folders/1f/gd24l7210d3d8crp0clcm4440000gn/T/copier.main.recopy_diff.gnos2law/.git/
+# /private/var/folders/1f/gd24l7210d3d8crp0clcm4440000gn/T/copier.main.update_diff.7eb725cw/.git/ # noqa: E501
+# /private/var/folders/1f/gd24l7210d3d8crp0clcm4440000gn/T/copier.main.recopy_diff.gnos2law/.git/ # noqa: E501
 _re_copier_dir = re.compile(r"copier\.[^\.]+\.\w+_diff\.")
 _IS_PROJ = not _re_copier_dir.search(Path(__file__).absolute().as_posix())
 
@@ -55,7 +55,8 @@ if __name__ == "__main__":
         f"""
 The 'mdformat_{_CONFIG.plugin_name}' package has been updated (or created)!
 
-1. Review the changes and commit. Merge conflicts may either be '*.rej' files or as inline git diffs
+1. Review the changes and commit
+    1. Merge conflicts may either be '*.rej' files or as inline git diffs
 2. Install dependencies with 'poetry install --sync'
 3. Run `./run --help` to show the available actions
 4. Run `./run main --keep-going` to try running all default tasks after the changes

@@ -7,7 +7,7 @@ from typing import Mapping
 
 from markdown_it import MarkdownIt
 from mdformat.renderer import RenderContext, RenderTreeNode
-from mdformat.renderer.typing import Render
+from mdformat.renderer.typing import Postprocess, Render
 
 from .mdit_plugins import template_noop_plugin
 
@@ -28,7 +28,7 @@ def update_mdit(mdit: MarkdownIt) -> None:
 
 def _render_template_noop(node: RenderTreeNode, context: RenderContext) -> str:
     """Render a `RenderTreeNode`."""
-    return node.render()
+    return node.render(context)
 
 
 # A mapping from syntax tree node type to a function that renders it.
