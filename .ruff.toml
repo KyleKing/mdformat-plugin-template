@@ -48,11 +48,7 @@ inline-quotes = 'double'
 known-first-party = ['mdformat_gfm_alerts']
 
 [lint.per-file-ignores]
-'__init__.py' = [
-  'D104', # Missing docstring in public package
-  'F401', # imported but unused; consider adding to __all__ or using a redundant alias
-]
-'tests/*.py' = [
+'**tests/*.py' = [
   'ANN001', # Missing type annotation for function argument
   'ANN201', # Missing return type annotation for public function
   'ANN202', # Missing return type annotation for private function `test_make_diffable`
@@ -63,6 +59,10 @@ known-first-party = ['mdformat_gfm_alerts']
   'PT004', # flake8-pytest-style: fixture does not return
   'S101', # Use of `assert` detected
   'T201', # `print` found'
+]
+'__init__.py' = [
+  'D104', # Missing docstring in public package
+  'F401', # imported but unused; consider adding to __all__ or using a redundant alias
 ]
 
 [lint.pylint]
