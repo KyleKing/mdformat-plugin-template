@@ -1,0 +1,15 @@
+# yamllint disable-file
+# Answer file maintained by Copier for: https://github.com/KyleKing/calcipy_template
+# DO NOT MODIFY THIS FILE. Edit by re-running copier and changing responses to the questions
+# Check into version control.
+_commit: HEAD
+_src_path: ../../mdformat-plugin-template
+author_email: ctt@ctt.ctt
+author_name: Carl The Template
+author_username: user_ctt
+copyright_date: '2024'
+package_name_kebab: mdformat-template-noop
+plugin_name: template_noop
+repository_namespace: user_ctt
+repository_provider: https://github.com
+repository_url: https://github.com/user_ctt/mdformat-template-noop
