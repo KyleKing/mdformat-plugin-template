@@ -1,4 +1,4 @@
-# mdformat-template-noop
+# mdformat-eb-plugin-example
 
 [![Build Status][ci-badge]][ci-link] [![PyPI version][pypi-badge]][pypi-link]
 
@@ -17,27 +17,27 @@ repos:
     hooks:
       - id: mdformat
         additional_dependencies:
-          - mdformat-template-noop
+          - mdformat-eb-plugin-example
 ```
 
 ### pipx
 
 ```sh
 pipx install mdformat
-pipx inject mdformat mdformat-template-noop
+pipx inject mdformat mdformat-eb-plugin-example
 ```
 
 ## HTML Rendering
 
-To generate HTML output, `template_noop_plugin` can be imported from `mdit_plugins`. For more guidance on `MarkdownIt`, see the docs: <https://markdown-it-py.readthedocs.io/en/latest/using.html#the-parser>
+To generate HTML output, `eb_plugin_example_plugin` can be imported from `mdit_plugins`. For more guidance on `MarkdownIt`, see the docs: <https://markdown-it-py.readthedocs.io/en/latest/using.html#the-parser>
 
 ```py
 from markdown_it import MarkdownIt
 
-from mdformat_template_noop.mdit_plugins import template_noop_plugin
+from mdformat_eb_plugin_example.mdit_plugins import eb_plugin_example_plugin
 
 md = MarkdownIt()
-md.use(template_noop_plugin)
+md.use(eb_plugin_example_plugin)
 
 text = "... markdown example ..."
 md.render(text)
@@ -48,9 +48,9 @@ md.render(text)
 
 ## Contributing
 
-See [CONTRIBUTING.md](https://github.com/user_ctt/mdformat-template-noop/blob/main/CONTRIBUTING.md)
+See [CONTRIBUTING.md](https://github.com/executablebooks/mdformat-eb-plugin-example/blob/main/CONTRIBUTING.md)
 
-[ci-badge]: https://github.com/user_ctt/mdformat-template-noop/workflows/CI/badge.svg?branch=main
-[ci-link]: https://github.com/user_ctt/mdformat-template-noop/actions?query=workflow%3ACI+branch%3Amain+event%3Apush
-[pypi-badge]: https://img.shields.io/pypi/v/mdformat-template-noop.svg
-[pypi-link]: https://pypi.org/project/mdformat-template-noop
+[ci-badge]: https://github.com/executablebooks/mdformat-eb-plugin-example/workflows/CI/badge.svg?branch=main
+[ci-link]: https://github.com/executablebooks/mdformat-eb-plugin-example/actions?query=workflow%3ACI+branch%3Amain+event%3Apush
+[pypi-badge]: https://img.shields.io/pypi/v/mdformat-eb-plugin-example.svg
+[pypi-link]: https://pypi.org/project/mdformat-eb-plugin-example

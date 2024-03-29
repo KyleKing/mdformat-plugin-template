@@ -4,7 +4,7 @@ requires = ["flit_core >=3.2.0,<4"]
 
 [project]
 authors = [
-  {email = "ctt@ctt.ctt", name = "user_ctt"},
+  {email = "executablebooks@gmail.com", name = "executablebooks"},
 ]
 classifiers = [
   "Intended Audience :: Developers",
@@ -18,12 +18,12 @@ dependencies = [
 ]
 dynamic = ["description", "version"]
 keywords = ["markdown", "markdown-it", "mdformat"]
-name = "mdformat_template_noop"
+name = "mdformat_eb_plugin_example"
 readme = "README.md"
 requires-python = ">=3.8.0"
 
 [project.entry-points."mdformat.parser_extension"]
-template_noop = "mdformat_template_noop"
+eb_plugin_example = "mdformat_eb_plugin_example"
 
 [project.optional-dependencies]
 dev = ["pre-commit"]
@@ -33,7 +33,7 @@ test = [
 ]
 
 [project.urls]
-homepage = "https://github.com/user_ctt/mdformat-template-noop"
+homepage = "https://github.com/executablebooks/mdformat-eb-plugin-example"
 
 [tool.flit.sdist]
 exclude = [".github/", "tests/"]

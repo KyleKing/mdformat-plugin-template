@@ -45,7 +45,7 @@ unfixable = [
 inline-quotes = 'double'
 
 [lint.isort]
-known-first-party = ['mdformat_template_noop']
+known-first-party = ['mdformat_eb_plugin_example']
 
 [lint.per-file-ignores]
 '__init__.py' = [

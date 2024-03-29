@@ -9,7 +9,7 @@ from markdown_it import MarkdownIt
 from mdformat.renderer import RenderContext, RenderTreeNode
 from mdformat.renderer.typing import Postprocess, Render
 
-from .mdit_plugins import template_noop_plugin
+from .mdit_plugins import eb_plugin_example_plugin
 
 
 def add_cli_options(parser: argparse.ArgumentParser) -> None:
@@ -23,10 +23,10 @@ def add_cli_options(parser: argparse.ArgumentParser) -> None:
 
 def update_mdit(mdit: MarkdownIt) -> None:
     """Update the parser."""
-    mdit.use(template_noop_plugin)
+    mdit.use(eb_plugin_example_plugin)
 
 
-def _render_template_noop(node: RenderTreeNode, context: RenderContext) -> str:
+def _render_eb_plugin_example(node: RenderTreeNode, context: RenderContext) -> str:
     """Render a `RenderTreeNode`."""
     return node.render(context)
 
@@ -35,7 +35,7 @@ def _render_template_noop(node: RenderTreeNode, context: RenderContext) -> str:
 # This can be used to overwrite renderer functions of existing syntax
 # or add support for new syntax.
 RENDERERS: Mapping[str, Render] = {
-    "<placeholder>": _render_template_noop,
+    "<placeholder>": _render_eb_plugin_example,
 }
 
 # A mapping from `RenderTreeNode.type` to a `Postprocess` that does

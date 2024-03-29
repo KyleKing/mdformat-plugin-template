@@ -1,4 +1,4 @@
-"""An mdformat plugin for `template_noop`."""
+"""An mdformat plugin for `eb_plugin_example`."""
 
 __version__ = "0.0.1"
 

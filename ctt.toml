@@ -4,11 +4,11 @@
 source_directory = "package_template"
 
 [defaults]
-author_email = "ctt@ctt.ctt"
-author_name = "Carl The Template"
-author_username = "user_ctt"
-package_name_kebab = "mdformat-template-noop"
-plugin_name = "template_noop"
+author_email = "executablebooks@gmail.com"
+author_name = "Executable Books"
+author_username = "executablebooks"
+copyright_date = "2020"
+plugin_name = "eb_plugin_example"
 repository_provider = "https://github.com"
 
 [output.".ctt/default"]

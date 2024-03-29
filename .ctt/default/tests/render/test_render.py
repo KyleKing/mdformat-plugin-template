@@ -4,7 +4,7 @@ import pytest
 from markdown_it import MarkdownIt
 from markdown_it.utils import read_fixture_file
 
-from mdformat_template_noop.mdit_plugins import template_noop_plugin
+from mdformat_eb_plugin_example.mdit_plugins import eb_plugin_example_plugin
 
 from ..helpers import print_text
 
@@ -18,7 +18,7 @@ def with_plugin(filename, plugins):
 @pytest.mark.parametrize(
     ("line", "title", "text", "expected", "plugins"),
     [
-        *with_plugin("template_noop.md", [template_noop_plugin]),
+        *with_plugin("eb_plugin_example.md", [eb_plugin_example_plugin]),
     ],
 )
 def test_render(line, title, text, expected, plugins):
