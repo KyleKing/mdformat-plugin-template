@@ -1,3 +1,10 @@
+## 0.1.1 (2024-03-29)
+
+### Fix
+
+- correct ruff config
+- resolve yamllint errors
+
 ## 0.1.0 (2024-03-29)
 
 ### Feat
