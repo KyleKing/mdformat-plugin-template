@@ -5,8 +5,13 @@ _min_copier_version: 8.0.0
 _answers_file: .copier-answers.yml
 _subdirectory: package_template
 _skip_if_exists:
-  - README.md
   - LICENSE
+  - README.md
+  - mdformat_{{ plugin_name }}/__init__.py
+  - mdformat_{{ plugin_name }}/plugin.py
+  - tests/format/fixtures.md
+  - tests/pre-commit-test.md
+  - tests/render/fixtures/{{ plugin_name }}.md
 _tasks:
   - git init
   - python _copier_post_generation.py
