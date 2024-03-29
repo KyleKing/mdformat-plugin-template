@@ -1,0 +1,15 @@
+[tool.commitizen]
+version = "0.0.1"
+version_files = ["pyproject.toml:^version"]
+
+[tool.poetry]
+authors = ["Kyle King <dev.act.kyle@gmail.com>"]
+description = "mdformat plugin template kept up to date with copier "
+name = "mdformat-plugin-template"
+version = "0.0.1"
+
+[tool.tomlsort]
+all = true
+in_place = true
+sort_first = ["python"]
+trailing_comma_inline_array = true
