@@ -45,3 +45,8 @@ now = true
 patterns = ["*.md", "*.py"]
 runner = "tox"
 runner_args = ["-e", "py38"]
+
+[tool.tomlsort]
+all = true
+in_place = true
+trailing_comma_inline_array = true

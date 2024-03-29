@@ -11,5 +11,4 @@ version = "0.0.1"
 [tool.tomlsort]
 all = true
 in_place = true
-sort_first = ["python"]
 trailing_comma_inline_array = true

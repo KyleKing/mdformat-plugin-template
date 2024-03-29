@@ -45,9 +45,11 @@ repos:
           - mdformat-gfm-alerts>=0.0.1
         exclude: tests/.+\.md
         args: [--wrap=no]
-  - repo: https://github.com/lyz-code/yamlfix/
-    rev: 1.16.0
+  - repo: https://github.com/adrienverge/yamllint.git
+    rev: v1.35.1
     hooks:
-      - id: yamlfix
-        types_or: []
-        types: [file, yaml]
+      - id: yamllint
+  - repo: https://github.com/pappasam/toml-sort
+    rev: v0.23.1
+    hooks:
+      - id: toml-sort-fix
