@@ -15,10 +15,10 @@ def _render_table(node: RenderTreeNode, context: RenderContext) -> str:
 
     Change "table" to the name of the syntax you want to render.
     """
-    return ""
+    return ''
 
 
 # A mapping from syntax tree node type to a function that renders it.
 # This can be used to overwrite renderer functions of existing syntax
 # or add support for new syntax.
-RENDERERS: Mapping[str, Render] = {"table": _render_table}
+RENDERERS: Mapping[str, Render] = {'table': _render_table}
