@@ -26,10 +26,6 @@ package_name_kebab:
   help: Your plugin_name converted to kebab-case for URLs
   default: "mdformat_{{ plugin_name | replace('_', '-') }}"
 
-project_description:
-  type: str
-  help: Your project description
-
 author_name:
   type: str
   help: Your full name
