@@ -19,6 +19,11 @@ repos:
     rev: 2.1.1
     hooks:
       - id: copier-template-tester
+  # Enforce commits that CD Action will recognize for auto-releases
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v3.20.0
+    hooks:
+      - id: commitizen
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.5.0
     hooks:
@@ -34,7 +39,6 @@ repos:
       - id: debug-statements
       - id: destroyed-symlinks
       - id: detect-private-key
-      - id: double-quote-string-fixer
       - id: end-of-file-fixer
         exclude: \.copier-answers\.yml
       - id: fix-byte-order-marker
@@ -43,55 +47,34 @@ repos:
       - id: forbid-new-submodules
       - id: mixed-line-ending
         args: [--fix=auto]
+      - id: pretty-format-json
+        args: [--autofix, --indent=4]
       - id: trailing-whitespace
-        exclude: __snapshots__/.*\.ambr
-  - repo: https://github.com/commitizen-tools/commitizen
-    rev: v3.20.0
+        exclude: tests/.*fixtures.*\.md
+  - repo: https://github.com/pre-commit/pygrep-hooks
+    rev: v1.10.0
     hooks:
-      - id: commitizen
+      - id: python-check-blanket-noqa
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.3.2
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
   - repo: https://github.com/executablebooks/mdformat
     rev: 0.7.17
     hooks:
       - id: mdformat
         additional_dependencies:
-          - "mdformat-mkdocs[recommended]>=2.0.6"
+          - mdformat-mkdocs[recommended]>=2.0.6
+          - mdformat-gfm-alerts>=0.0.1
+        exclude: tests/.+\.md
         args: [--wrap=no]
-        exclude: _.+\.md|CHANGELOG\.md|CODE_TAG_SUMMARY\.md
-  - repo: https://github.com/shellcheck-py/shellcheck-py
-    rev: v0.10.0.1
-    hooks:
-      - id: shellcheck
-        args: [--severity=warning]
-  - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: "v4.0.0-alpha.8"
-    hooks:
-      - id: prettier
-        additional_dependencies:
-          # Note: this version must be the same as the hook revision
-          - "prettier@4.0.0-alpha.8"
-          - "prettier-plugin-sh"
-        exclude: \.copier-answers\.yml|tests/.*/cassettes/.*\.yaml
-        types_or: [html, javascript, json, shell, yaml]
   - repo: https://github.com/adrienverge/yamllint.git
     rev: v1.35.1
     hooks:
       - id: yamllint
-        exclude: tests/.*/cassettes/.*\.yaml
   - repo: https://github.com/pappasam/toml-sort
     rev: v0.23.1
     hooks:
       - id: toml-sort-fix
-        exclude: poetry\.lock
-  - repo: https://github.com/MarcoGorelli/absolufy-imports
-    rev: v0.3.1
-    hooks:
-      - id: absolufy-imports
-        args: [--never]
-        files: test_template/.*\.py
-  - repo: https://github.com/KyleKing/calcipy
-    rev: 2.0.4
-    hooks:
-      - id: copier-forbidden-files
-      - id: lint-fix
-      - id: flake8
-      - id: tags
