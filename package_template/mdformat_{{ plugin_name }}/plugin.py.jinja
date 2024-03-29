@@ -43,5 +43,4 @@ RENDERERS: Mapping[str, Render] = {
 # `Render` funcs, `Postprocess` funcs are collaborative: any number of
 # plugins can define a postprocessor for a syntax type and all of them
 # will run in series.
-POSTPROCESSORS: Mapping[str, Postprocess] = {
-}
+POSTPROCESSORS: Mapping[str, Postprocess] = {}

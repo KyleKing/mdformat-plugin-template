@@ -9,7 +9,7 @@ from pathlib import Path
 # Don't print any output if matching directories like:
 # /private/var/folders/1f/gd24l7210d3d8crp0clcm4440000gn/T/copier.main.update_diff.7eb725cw/.git/
 # /private/var/folders/1f/gd24l7210d3d8crp0clcm4440000gn/T/copier.main.recopy_diff.gnos2law/.git/
-_re_copier_dir = re.compile(r'copier\.[^\.]+\.\w+_diff\.')
+_re_copier_dir = re.compile(r"copier\.[^\.]+\.\w+_diff\.")
 _IS_PROJ = not _re_copier_dir.search(Path(__file__).absolute().as_posix())
 
 
@@ -20,7 +20,7 @@ class Config:
     repository_url: str
 
 
-_CONFIG_PATH = Path(__file__).with_suffix('.json')
+_CONFIG_PATH = Path(__file__).with_suffix(".json")
 _CONFIG = Config(**json.loads(_CONFIG_PATH.read_text()))
 
 
@@ -31,18 +31,16 @@ def _log(message: str) -> None:
 
 def cleanup() -> None:
     """Remove files and folders that are no longer used."""
-    paths = [
-    ]
-    directories = [
-    ]
+    paths = []
+    directories = []
 
     for pth in paths:
         if pth.is_file():
-            _log(f'Removing: {pth}')
+            _log(f"Removing: {pth}")
             pth.unlink()
     for dir_pth in directories:
         if dir_pth.is_dir():
-            _log(f'Deleting: {dir_pth}')
+            _log(f"Deleting: {dir_pth}")
             shutil.rmtree(dir_pth)
 
 
@@ -52,7 +50,7 @@ def delete_myself() -> None:
     _CONFIG_PATH.unlink()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     _log(
         f"""
 The 'mdformat_{_CONFIG.plugin_name}' package has been updated (or created)!
