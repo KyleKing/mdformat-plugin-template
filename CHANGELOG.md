@@ -1,3 +1,15 @@
+## 0.1.3 (2024-03-30)
+
+### Fix
+
+- correct leftover reference to mdformat_admon
+- use precise pre-commit Action tag
+
+### Refactor
+
+- remove _skip_if_exists rules
+- use pytest-beartype in tox and ptw
+
 ## 0.1.2 (2024-03-29)
 
 ### Fix
