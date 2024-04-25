@@ -1,3 +1,9 @@
+## 0.1.5 (2024-04-25)
+
+### Fix
+
+- ignore some beartype warnings
+
 ## 0.1.4 (2024-03-30)
 
 ### Fix
