@@ -68,7 +68,7 @@ ignore_patterns = []
 now = true
 patterns = ["*.md", "*.py"]
 runner = "tox"
-runner_args = ["-e", "py38-beartype"]
+runner_args = ["-e", "py312-beartype"]
 
 [tool.ruff]
 # Docs: https://github.com/charliermarsh/ruff
