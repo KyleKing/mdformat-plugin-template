@@ -1,3 +1,10 @@
+## 0.1.7 (2024-06-22)
+
+### Fix
+
+- add ruff, toml, and pyright config
+- add missing py.typed
+
 ## 0.1.6 (2024-06-03)
 
 ### Fix
