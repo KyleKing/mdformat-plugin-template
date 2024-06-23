@@ -1,3 +1,21 @@
+## 0.2.0 (2024-06-23)
+
+### Feat
+
+- replace .ruff.toml with pyproject config
+
+### Fix
+
+- resolve ruff errors
+- more selective pre-commit stages
+- remove pygrep pre-commit hooks
+- correct tox python versions
+
+### Refactor
+
+- remove snippet for comparing configs
+- initialize sync pyproject
+
 ## 0.1.7 (2024-06-22)
 
 ### Fix
