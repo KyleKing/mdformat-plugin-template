@@ -52,10 +52,6 @@ repos:
         args: [--autofix, --indent=4]
       - id: trailing-whitespace
         exclude: tests/.*fixtures.*\.md|__snapshots__/.*\.ambr
-  - repo: https://github.com/pre-commit/pygrep-hooks
-    rev: v1.10.0
-    hooks:
-      - id: python-check-blanket-noqa
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.4.10
     hooks:
