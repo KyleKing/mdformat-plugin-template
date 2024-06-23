@@ -1,3 +1,9 @@
+## 0.2.3 (2024-06-23)
+
+### Fix
+
+- simplify logging for post-setup script
+
 ## 0.2.2 (2024-06-23)
 
 ### Fix
