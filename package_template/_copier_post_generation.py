@@ -7,10 +7,10 @@ import shutil
 from dataclasses import dataclass
 from pathlib import Path
 
-# Don't print any output if matching directories like:
+# Prevent printing in triplicate when matching directories like:
 # /private/var/folders/1f/gd24l7210d3d8crp0clcm4440000gn/T/copier.main.update_diff.7eb725cw/.git/ # noqa: E501
 # /private/var/folders/1f/gd24l7210d3d8crp0clcm4440000gn/T/copier.main.recopy_diff.gnos2law/.git/ # noqa: E501
-_re_copier_dir = re.compile(r"copier\.[^\.]+\.\w+_diff\.")
+_re_copier_dir = re.compile(r"\/[a-z0-9]{30}\/T\/copier\.[^\/]+\/\.git\/$")
 _IS_PROJ = not _re_copier_dir.search(Path(__file__).absolute().as_posix())
 
 
