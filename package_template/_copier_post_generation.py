@@ -1,4 +1,4 @@
-"""Post-Generation Script to be run from Copier."""  # noqa: INP001
+"""Post-Generation Script to be run from Copier."""
 
 import json
 import re
@@ -31,17 +31,20 @@ def _log(message: str) -> None:
 
 def cleanup() -> None:
     """Remove files and folders that are no longer used."""
-    paths = []
-    directories = []
-
-    for pth in paths:
+    remove_list = Path("remove-if-found.txt")
+    if not remove_list.is_file():
+        return
+    for line in remove_list.read_text().split("\n"):
+        if not line:
+            continue
+        pth = Path(line)
         if pth.is_file():
             _log(f"Removing: {pth}")
             pth.unlink()
-    for dir_pth in directories:
-        if dir_pth.is_dir():
-            _log(f"Deleting: {dir_pth}")
-            shutil.rmtree(dir_pth)
+        elif pth.is_dir():
+            _log(f"Deleting: {pth}")
+            shutil.rmtree(pth)
+    remove_list.unlink()
 
 
 def delete_myself() -> None:

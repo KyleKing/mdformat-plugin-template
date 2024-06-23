@@ -24,8 +24,9 @@ repos:
     rev: v3.20.0
     hooks:
       - id: commitizen
+  # Sync below config with 'package_template'
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
+    rev: v4.6.0
     hooks:
       - id: check-added-large-files
       - id: check-executables-have-shebangs
@@ -40,7 +41,7 @@ repos:
       - id: destroyed-symlinks
       - id: detect-private-key
       - id: end-of-file-fixer
-        exclude: \.copier-answers\.yml
+        exclude: \.copier-answers\.yml|__snapshots__/.*\.ambr
       - id: fix-byte-order-marker
       - id: fix-encoding-pragma
         args: [--remove]
@@ -50,13 +51,13 @@ repos:
       - id: pretty-format-json
         args: [--autofix, --indent=4]
       - id: trailing-whitespace
-        exclude: tests/.*fixtures.*\.md
+        exclude: tests/.*fixtures.*\.md|__snapshots__/.*\.ambr
   - repo: https://github.com/pre-commit/pygrep-hooks
     rev: v1.10.0
     hooks:
       - id: python-check-blanket-noqa
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.3.4
+    rev: v0.4.10
     hooks:
       - id: ruff
         args: [--fix]

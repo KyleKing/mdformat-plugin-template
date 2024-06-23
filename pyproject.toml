@@ -6,23 +6,6 @@ requires = ["poetry-core"]
 version = "0.1.7"
 version_files = ["pyproject.toml:^version"]
 
-[tool.mypy]
-check_untyped_defs = true
-disallow_any_generics = true
-enable_error_code = ["ignore-without-code", "possibly-undefined", "redundant-expr", "truthy-bool"]
-extra_checks = true
-files = ["test_template", "tests"]
-no_implicit_reexport = true
-python_version = "3.10"
-show_column_numbers = true
-show_error_codes = true
-strict_equality = true
-warn_no_return = true
-warn_redundant_casts = true
-warn_unreachable = true
-warn_unused_configs = true
-warn_unused_ignores = true
-
 [tool.poetry]
 authors = ["Kyle King <dev.act.kyle@gmail.com>"]
 description = "mdformat plugin template kept up to date with copier "
@@ -35,20 +18,15 @@ version = "0.1.7"
 python = "^3.11"
 tomlkit = ">=0.12.5"
 
-[tool.pydantic-mypy]
-init_forbid_extra = true
-init_typed = true
-warn_required_dynamic_aliases = true
-
 [tool.pyright]
-include = ["test_template", "tests"]
-pythonVersion = "3.10"
+include = ["mdformat_eb_plugin_example", "tests"]
+pythonVersion = "3.8"
 
 [tool.ruff]
 # Docs: https://github.com/charliermarsh/ruff
 # Tip: poetry run python -m ruff --explain RUF100
-line-length = 120
-target-version = 'py310'
+line-length = 88
+target-version = 'py38'
 
 [tool.ruff.lint]
 ignore = [
@@ -76,34 +54,15 @@ unfixable = [
   'ERA001', # Commented out code
 ]
 
-[tool.ruff.lint.flake8-quotes]
-inline-quotes = 'single'
-
-[tool.ruff.lint.flake8-tidy-imports.banned-api]
-'invoke.collection.Collection'.msg = 'Use calcipy.collection.Collection instead.'
-'invoke.tasks.task'.msg = 'Use calcipy.cli.task instead.'
-'typing.Callable'.msg = 'Use beartype.typing.* instead.'
-'typing.Dict'.msg = 'Use beartype.typing.* instead.'
-'typing.List'.msg = 'Use beartype.typing.* instead.'
-'typing.Optional'.msg = 'Use beartype.typing.* instead.'
-'typing.Protocol'.msg = 'Use beartype.typing.* instead.'
-'typing.TypeVar'.msg = 'Use beartype.typing.* instead.'
-
 [tool.ruff.lint.isort]
-known-first-party = ['test_template']
+known-first-party = ['mdformat_eb_plugin_example']
 
 [tool.ruff.lint.per-file-ignores]
-'./test_template/../*.py' = [
+'./mdformat_eb_plugin_example/../*.py' = [
   'INP001', # File `/<>.py` is part of an implicit namespace package. Add an `__init__.py`.
 ]
 '__init__.py' = [
   'D104', # Missing docstring in public package
-]
-'scripts/*.py' = [
-  'INP001', # File `scripts/*.py` is part of an implicit namespace package. Add an `__init__.py`.
-]
-'scripts/check_imports.py' = [
-  'F401', # imported but unused; consider adding to __all__ or using a redundant alias
 ]
 'tests/*.py' = [
   'ANN001', # Missing type annotation for function argument
@@ -119,5 +78,4 @@ known-first-party = ['test_template']
 [tool.tomlsort]
 all = true
 in_place = true
-sort_first = ["python"]
 trailing_comma_inline_array = true
