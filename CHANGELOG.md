@@ -1,3 +1,13 @@
+## 0.2.2 (2024-06-23)
+
+### Fix
+
+- resolve potential referencing conflict with beartype
+
+### Refactor
+
+- fix regex to match the copier directory
+
 ## 0.2.1 (2024-06-23)
 
 ### Fix
