@@ -8,6 +8,18 @@ _tasks:
   - git init
   - python _copier_post_generation.py
 
+_message_after_copy: |
+  The 'mdformat_{{ plugin_name }}' package has been initialized!
+
+  1. Review the changes and commit
+      1. Merge conflicts may either be '*.rej' files or as inline git diffs
+  2. See CONTRIBUTING.md (TLDR: run `tox`)
+  3. If this is a new project, you could create the GitHub repo with:
+
+      ```sh
+      gh repo create "{{ package_name_kebab }}" --source=. --remote=origin --push --homepage="{{ repository_url }}"
+      ```
+
 # ====== QUESTIONS ======
 plugin_name:
   type: str
