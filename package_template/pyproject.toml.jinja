@@ -87,6 +87,7 @@ ignore = [
   'D203', # "1 blank line required before class docstring" (Conflicts with D211)
   'D213', # "Multi-line docstring summary should start at the second line" (Conflicts with D212)
   'EM101', # Exception must not use a string literal, assign to variable first
+  'FBT001', # Boolean-typed positional argument in function definition
   'FIX001', # Line contains FIXME
   'FIX002', # Line contains TODO
   'FIX004', # Line contains HACK
@@ -103,7 +104,7 @@ unfixable = [
 ]
 
 [tool.ruff.lint.isort]
-known-first-party = ['mdformat_{{ plugin_name }}']
+known-first-party = ['mdformat_{{ plugin_name }}', 'tests']
 
 [tool.ruff.lint.per-file-ignores]
 '__init__.py' = [

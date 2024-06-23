@@ -5,8 +5,7 @@ from markdown_it import MarkdownIt
 from markdown_it.utils import read_fixture_file
 
 from mdformat_eb_plugin_example.mdit_plugins import eb_plugin_example_plugin
-
-from ..helpers import print_text
+from tests.helpers import print_text
 
 FIXTURE_PATH = Path(__file__).parent / "fixtures"
 

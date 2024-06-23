@@ -39,6 +39,7 @@ ignore = [
   'D203', # "1 blank line required before class docstring" (Conflicts with D211)
   'D213', # "Multi-line docstring summary should start at the second line" (Conflicts with D212)
   'EM101', # Exception must not use a string literal, assign to variable first
+  'FBT001', # Boolean-typed positional argument in function definition
   'FIX001', # Line contains FIXME
   'FIX002', # Line contains TODO
   'FIX004', # Line contains HACK
@@ -62,6 +63,7 @@ known-first-party = ['mdformat_eb_plugin_example']
   'ANN001', # Missing type annotation for function argument
   'ANN201', # Missing return type annotation for public function
   'ANN202', # Missing return type annotation for private function `test_make_diffable`
+  'ARG001', # Unused function argument: `line`
   'D100', # Missing docstring in public module
   'D103', # Missing docstring in public function
   'PLC2701', # Private name import `_<>` from external module
@@ -75,6 +77,7 @@ known-first-party = ['mdformat_eb_plugin_example']
   'ANN001', # Missing type annotation for function argument
   'ANN201', # Missing return type annotation for public function
   'ANN202', # Missing return type annotation for private function `test_make_diffable`
+  'ARG001', # Unused function argument: `line`
   'D100', # Missing docstring in public module
   'D103', # Missing docstring in public function
   'PLC2701', # Private name import `_<>` from external module
@@ -85,6 +88,7 @@ known-first-party = ['mdformat_eb_plugin_example']
   'ANN001', # Missing type annotation for function argument
   'ANN201', # Missing return type annotation for public function
   'ANN202', # Missing return type annotation for private function `test_make_diffable`
+  'ARG001', # Unused function argument: `line`
   'D100', # Missing docstring in public module
   'D103', # Missing docstring in public function
   'PLC2701', # Private name import `_<>` from external module
