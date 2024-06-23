@@ -29,10 +29,10 @@ def cleanup() -> None:
 
 def delete_myself() -> None:
     """Delete this file after completing the main script."""
-    _log("Running self-deleting post-setup script.")
     Path(__file__).unlink()
 
 
 if __name__ == "__main__":
+    _log("Running self-deleting post-setup script.")
     cleanup()
     delete_myself()
