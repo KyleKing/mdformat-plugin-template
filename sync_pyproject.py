@@ -20,11 +20,6 @@ def merge() -> None:
 
     tl_pyproject.write_text(tomlkit.dumps(tl_doc))
 
-    # ruff_pth = Path(".ctt/default/.ruff.toml")
-    # ruff_doc = tomlkit.parse(ruff_pth.read_text())
-    # ctt_doc["tool"]["ruff"] = ruff_doc
-    # ctt_pyproject.write_text(tomlkit.dumps(ctt_doc))
-
 
 if __name__ == "__main__":
     merge()
