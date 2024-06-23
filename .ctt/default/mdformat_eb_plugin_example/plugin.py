@@ -2,17 +2,19 @@
 
 from __future__ import annotations
 
-import argparse
-from typing import Mapping
-
-from markdown_it import MarkdownIt
-from mdformat.renderer import RenderContext, RenderTreeNode
-from mdformat.renderer.typing import Postprocess, Render
+from typing import TYPE_CHECKING, Mapping
 
 from .mdit_plugins import eb_plugin_example_plugin
 
+if TYPE_CHECKING:
+    from argparse import ArgumentParser
 
-def add_cli_options(parser: argparse.ArgumentParser) -> None:
+    from markdown_it import MarkdownIt
+    from mdformat.renderer import RenderContext, RenderTreeNode
+    from mdformat.renderer.typing import Postprocess, Render
+
+
+def add_cli_options(parser: ArgumentParser) -> None:
     """Add options to the mdformat CLI, to be stored in `mdit.options["mdformat"]`."""
     parser.add_argument(
         "--argument",

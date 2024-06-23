@@ -1,3 +1,4 @@
+# noqa: INP001
 """Post-Generation Script to be run from Copier."""
 
 import json

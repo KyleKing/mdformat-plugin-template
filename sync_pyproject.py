@@ -18,6 +18,11 @@ def merge() -> None:
     for key in synced_keys:
         tl_doc["tool"][key] = ctt_doc["tool"][key]
 
+    per_file_ignores = tl_doc["tool"]["ruff"]["lint"]["per-file-ignores"]
+    for key in ("tests/*.py",):
+        per_file_ignores[f"package_template/{key}"] = per_file_ignores[key]
+        per_file_ignores[f"{ctt_subdir}/{key}"] = per_file_ignores[key]
+
     tl_pyproject.write_text(tomlkit.dumps(tl_doc))
 
 
