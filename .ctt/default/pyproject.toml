@@ -20,7 +20,7 @@ dynamic = ["description", "version"]
 keywords = ["markdown", "markdown-it", "mdformat", "mdformat_plugin_template"]
 name = "mdformat_eb_plugin_example"
 readme = "README.md"
-requires-python = ">=3.8.12"
+requires-python = ">=3.8.5"
 
 [project.entry-points."mdformat.parser_extension"]
 eb_plugin_example = "mdformat_eb_plugin_example"
