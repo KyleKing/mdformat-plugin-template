@@ -1,3 +1,14 @@
+## 0.2.4 (2024-06-24)
+
+### Fix
+
+- lower minimum Python for Windows v3.10 CI
+- update minimum mdformat-mkdocs in pre-commit
+
+### Refactor
+
+- fix the location of the log
+
 ## 0.2.3 (2024-06-23)
 
 ### Fix
