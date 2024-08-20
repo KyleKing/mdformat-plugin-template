@@ -1,3 +1,10 @@
+## 0.2.6 (2024-08-20)
+
+### Fix
+
+- sync improvements from mdformat-obsidian
+- add __version__
+
 ## 0.2.5 (2024-06-24)
 
 ### Fix
