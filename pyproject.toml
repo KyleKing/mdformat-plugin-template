@@ -38,12 +38,17 @@ ignore = [
   'CPY001', # Missing copyright notice at top of file
   'D203', # "1 blank line required before class docstring" (Conflicts with D211)
   'D213', # "Multi-line docstring summary should start at the second line" (Conflicts with D212)
+  'DOC201', # `return` is not documented in docstring
+  'DOC402', # `yield` is not documented in docstring
   'EM101', # Exception must not use a string literal, assign to variable first
   'FBT001', # Boolean-typed positional argument in function definition
   'FIX001', # Line contains FIXME
   'FIX002', # Line contains TODO
   'FIX004', # Line contains HACK
+  'N803', # Argument name `startLine` should be lowercase
+  'N815', # Variable `lineMax` in class scope should not be mixedCase
   'PLR0913', # Too many arguments in function definition (6 > 5)
+  'S101', # Use of `assert` detected
   'TCH002', # Move third-party import `mdformat.renderer.typing.Postprocess` into a type-checking block (for beartype)
   'TCH003', # Move standard library import `argparse` into a type-checking block (for beartype)
   'TD001', # Invalid TODO tag: `FIXME`
@@ -97,6 +102,9 @@ known-first-party = ['mdformat_eb_plugin_example', 'tests']
   'PT004', # flake8-pytest-style: fixture does not return
   'S101', # Use of `assert` detected
 ]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
 
 [tool.tomlsort]
 all = true
