@@ -7,6 +7,7 @@ An `mdformat` plugin template kept up to date with copier. This scaffold closely
 ```sh
 # Install copier globally with pipx or use your preferred method
 pipx install copier
+# or: uv tool install copier
 
 # For end users, get the template with the below snippet. Replace dest_folder_name (can use ".")
 copier copy --UNSAFE gh:KyleKing/mdformat-plugin-template dest_folder_name

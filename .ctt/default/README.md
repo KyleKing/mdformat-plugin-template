@@ -25,7 +25,11 @@ repos:
 ```sh
 pipx install mdformat
 pipx inject mdformat mdformat-eb-plugin-example
+```
 
+Or with uv:
+
+```sh
 uv tool run --from mdformat-eb-plugin-example mdformat
 ```
 
