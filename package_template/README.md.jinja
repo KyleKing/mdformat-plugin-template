@@ -20,11 +20,13 @@ repos:
           - {{ package_name_kebab }}
 ```
 
-### pipx
+### pipx/uv
 
 ```sh
 pipx install mdformat
 pipx inject mdformat {{ package_name_kebab }}
+
+uv tool run --from {{ package_name_kebab }} mdformat
 ```
 
 ## HTML Rendering

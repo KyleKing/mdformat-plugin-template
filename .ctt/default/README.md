@@ -20,11 +20,13 @@ repos:
           - mdformat-eb-plugin-example
 ```
 
-### pipx
+### pipx/uv
 
 ```sh
 pipx install mdformat
 pipx inject mdformat mdformat-eb-plugin-example
+
+uv tool run --from mdformat-eb-plugin-example mdformat
 ```
 
 ## HTML Rendering
