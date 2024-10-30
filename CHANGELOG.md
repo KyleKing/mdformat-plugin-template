@@ -1,3 +1,10 @@
+## 0.2.7 (2024-10-30)
+
+### Fix
+
+- generate release notes
+- document the appropriate steps for versioning
+
 ## 0.2.6 (2024-08-20)
 
 ### Fix

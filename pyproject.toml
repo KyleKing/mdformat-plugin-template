@@ -3,7 +3,7 @@ build-backend = "poetry.core.masonry.api"
 requires = ["poetry-core"]
 
 [tool.commitizen]
-version = "0.2.6"
+version = "0.2.7"
 version_files = ["pyproject.toml:^version"]
 
 [tool.poetry]
@@ -12,7 +12,7 @@ description = "mdformat plugin template kept up to date with copier "
 name = "mdformat-plugin-template"
 package-mode = false
 readme = "README.md"
-version = "0.2.6"
+version = "0.2.7"
 
 [tool.poetry.dependencies]
 python = "^3.11"
