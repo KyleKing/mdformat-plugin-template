@@ -1,3 +1,10 @@
+## 1.0.2 (2024-10-30)
+
+### Fix
+
+- restore pip install of flit for Windows runners
+- run flit install for global python
+
 ## 1.0.1 (2024-10-30)
 
 ### Fix
