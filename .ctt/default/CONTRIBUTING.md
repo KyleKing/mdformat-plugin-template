@@ -70,6 +70,12 @@ Run the latest local code anywhere with pipx.
 pipx install . --include-deps --force --editable
 ```
 
+Or with uv:
+
+```sh
+uv tool install mdformat --force --with-editable=.
+```
+
 ## Publish to PyPi
 
 First, update the version in `mdformat_eb_plugin_example/__init__.py`
