@@ -109,7 +109,7 @@
 
 ### Refactor
 
-- remove _skip_if_exists rules
+- remove \_skip_if_exists rules
 - use pytest-beartype in tox and ptw
 
 ## 0.1.2 (2024-03-29)
