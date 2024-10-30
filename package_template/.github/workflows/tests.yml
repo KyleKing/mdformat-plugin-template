@@ -32,7 +32,7 @@ jobs:
         # so that coverage will be recorded for the module
         run: |
           pipx install flit
-          flit install --deps=production --extras=test --pth-file
+          flit install --deps=production --extras=test --pth-file --python=$(which python)
       - name: Run pytest
         run: |
           pytest --cov=$(ls | grep "mdformat_" | head) --cov-report=xml --cov-report=term-missing
