@@ -1,6 +1,6 @@
 [build-system]
 build-backend = "flit_core.buildapi"
-requires = ["flit_core >=3.2.0,<4"]
+requires = ["flit_core >=3.9.0,<4"]
 
 [project]
 authors = [
@@ -13,14 +13,14 @@ classifiers = [
   "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
-  "mdformat >= 0.7.17",
+  "mdformat >= 0.7.18",
   "mdit-py-plugins >= 0.4.1",
 ]
 dynamic = ["description", "version"]
 keywords = ["markdown", "markdown-it", "mdformat", "mdformat_plugin_template"]
 name = "mdformat_eb_plugin_example"
 readme = "README.md"
-requires-python = ">=3.8.5"
+requires-python = ">=3.9.0"
 
 [project.entry-points."mdformat.parser_extension"]
 eb_plugin_example = "mdformat_eb_plugin_example"
@@ -28,9 +28,9 @@ eb_plugin_example = "mdformat_eb_plugin_example"
 [project.optional-dependencies]
 dev = ["pre-commit"]
 test = [
-  "pytest >= 7.4.4",
-  "pytest-beartype >= 0.0.2",
-  "pytest-cov >= 4.1.0",
+  "pytest >= 8.3.3",
+  "pytest-beartype >= 0.1.0",
+  "pytest-cov >= 5.0.0",
 ]
 
 [project.urls]
@@ -49,7 +49,7 @@ enable_error_code = ["ignore-without-code", "possibly-undefined", "redundant-exp
 extra_checks = true
 files = ["mdformat_eb_plugin_example", "tests"]
 no_implicit_reexport = true
-python_version = "3.8"
+python_version = "3.9"
 show_column_numbers = true
 show_error_codes = true
 strict_equality = true
@@ -61,7 +61,7 @@ warn_unused_ignores = true
 
 [tool.pyright]
 include = ["mdformat_eb_plugin_example", "tests"]
-pythonVersion = "3.8"
+pythonVersion = "3.9"
 
 [tool.pytest-watcher]
 ignore_patterns = []
@@ -74,7 +74,7 @@ runner_args = ["-e", "py312-beartype"]
 # Docs: https://github.com/charliermarsh/ruff
 # Tip: poetry run python -m ruff --explain RUF100
 line-length = 88
-target-version = 'py38'
+target-version = 'py39'
 
 [tool.ruff.lint]
 ignore = [
