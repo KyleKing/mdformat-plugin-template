@@ -41,7 +41,8 @@ tox -e py312-pre-commit
 or directly
 
 ```bash
-pip install pre-commit
+pipx install pre-commit
+# or: uv tool install pre-commit
 pre-commit run --all
 ```
 
