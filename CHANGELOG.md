@@ -1,3 +1,9 @@
+## 1.0.1 (2024-10-30)
+
+### Fix
+
+- remove ruff from pre-commit
+
 ## 1.0.0 (2024-10-30)
 
 ### Feat
