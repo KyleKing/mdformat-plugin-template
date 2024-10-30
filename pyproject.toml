@@ -20,13 +20,13 @@ tomlkit = ">=0.12.5"
 
 [tool.pyright]
 include = ["mdformat_eb_plugin_example", "tests"]
-pythonVersion = "3.8"
+pythonVersion = "3.9"
 
 [tool.ruff]
 # Docs: https://github.com/charliermarsh/ruff
 # Tip: poetry run python -m ruff --explain RUF100
 line-length = 88
-target-version = 'py38'
+target-version = 'py39'
 
 [tool.ruff.lint]
 ignore = [
