@@ -27,12 +27,6 @@ repos:
         args: [--autofix, --indent=4]
       - id: trailing-whitespace
         exclude: tests/.*fixtures.*\.md|__snapshots__/.*\.ambr
-  - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.6.1
-    hooks:
-      - id: ruff
-        args: [--fix]
-      - id: ruff-format
   - repo: https://github.com/executablebooks/mdformat
     rev: 0.7.18
     hooks:
