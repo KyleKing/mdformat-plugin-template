@@ -1,3 +1,15 @@
+## 1.1.0 (2024-12-14)
+
+### Feat
+
+- add optional synced factory code
+- move tox.ini into pyproject.toml
+- improve tox and update dependencies
+
+### Fix
+
+- don't export __version__
+
 ## 1.0.2 (2024-10-30)
 
 ### Fix
