@@ -1,3 +1,12 @@
+## 1.1.1 (2024-12-14)
+
+### Fix
+
+- correctly remove synced directory if not found
+- correct typo in directory name
+- resolve ruff errors
+- correct plugin name
+
 ## 1.1.0 (2024-12-14)
 
 ### Feat
