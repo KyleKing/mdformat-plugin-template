@@ -1,4 +1,3 @@
-# noqa: INP001
 """Post-Generation Script to be run from Copier."""
 
 import shutil
@@ -27,6 +26,20 @@ def cleanup() -> None:
     remove_list.unlink()
 
 
+def evaluate_configuration() -> None:
+    copier_text = Path(".copier-answers.yml").read_text(encoding="utf-8")
+    copier_dict = {
+        line.split(":")[0]: line.split(":")[-1].strip()
+        for line in copier_text.split("\n")
+        if ":" in line
+    }
+
+    pth_admon = Path("_synced/admon_factories")
+    if pth_admon.is_dir() and copier_dict.get("sync_admon_factories") != "true":
+        _log(f"Removing {pth_admon}. To keep, set 'sync_admon_factories=true'")
+        shutil.rmtree(pth_admon)
+
+
 def delete_myself() -> None:
     """Delete this file after completing the main script."""
     Path(__file__).unlink()
@@ -35,4 +48,5 @@ def delete_myself() -> None:
 if __name__ == "__main__":
     _log("Running self-deleting post-setup script.")
     cleanup()
+    evaluate_configuration()
     delete_myself()

@@ -64,3 +64,9 @@ copyright_date:
   type: str
   help: The copyright year
   default: "{{ '%Y' | strftime }}"
+
+# PLANNED: there should be a better way to sync code
+sync_admon_factories:
+  type: bool
+  help: "If True, a '_synced/factories/*' directory will be created with helpers for mdformat admonitions"
+  default: false
