@@ -150,15 +150,15 @@ isolated_build = true
 skip_missing_interpreters = false
 
 [tool.tox."py{312}-beartype"]
-commands = "pytest {posargs} --ff --nf -vv --exitfirst --beartype-packages='mdformat_eb_plugin_example'"
+commands = "pytest posargs --ff --nf -vv --exitfirst --beartype-packages='mdformat_{{ plugin_name }}'"
 extras = "test"
 
 [tool.tox."py{312}-mypy"]
-commands = "mypy ./mdformat_eb_plugin_example"
+commands = "mypy ./mdformat_{{ plugin_name }}"
 deps = "mypy>=1.13.0"
 
 [tool.tox."py{312}-pre-commit"]
-commands = "pre-commit run {posargs:--all-files}"
+commands = "pre-commit run posargs:--all-files"
 deps = "pre-commit>=4.0.1"
 
 [tool.tox."py{312}-ruff"]
@@ -170,9 +170,9 @@ deps = "ruff>=0.8.3"
 skip_install = true
 
 [tool.tox."py{39}-cov"]
-commands = "pytest --cov=mdformat_eb_plugin_example {posargs}"
+commands = "pytest --cov=mdformat_{{ plugin_name }} posargs"
 extras = "test"
 
 [tool.tox."py{39}-hook"]
-commands = "pre-commit run --config .pre-commit-test.yaml {posargs:--all-files --verbose --show-diff-on-failure}"
+commands = "pre-commit run --config .pre-commit-test.yaml posargs:--all-files --verbose --show-diff-on-failure"
 deps = "pre-commit>=4.0.1"
