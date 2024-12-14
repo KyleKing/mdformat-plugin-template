@@ -2,7 +2,7 @@
 
 # Convenience script to sync latest .ctt configuration files with the top-level template
 
-cp package_template/.yamllint.yaml .yamllint.yaml
+cp .ctt/default/.yamllint.yaml .yamllint.yaml
 
 poetry run python sync_pyproject.py
 
