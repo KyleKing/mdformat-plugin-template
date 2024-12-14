@@ -3,6 +3,8 @@
 import shutil
 from pathlib import Path
 
+CWD = Path(__file__).parent
+
 
 def _log(message: str) -> None:
     print(message)  # noqa: T201
@@ -10,13 +12,13 @@ def _log(message: str) -> None:
 
 def cleanup() -> None:
     """Remove files and folders that are no longer used."""
-    remove_list = Path("remove-if-found.txt")
+    remove_list = CWD / "remove-if-found.txt"
     if not remove_list.is_file():
         return
     for line in remove_list.read_text().split("\n"):
         if not line:
             continue
-        pth = Path(line)
+        pth = CWD / line
         if pth.is_file():
             _log(f"Removing: {pth}")
             pth.unlink()
@@ -27,17 +29,19 @@ def cleanup() -> None:
 
 
 def evaluate_configuration() -> None:
-    copier_text = Path(".copier-answers.yml").read_text(encoding="utf-8")
+    copier_text = (CWD / ".copier-answers.yml").read_text(encoding="utf-8")
     copier_dict = {
         line.split(":")[0]: line.split(":")[-1].strip()
         for line in copier_text.split("\n")
         if ":" in line
     }
 
-    pth_admon = Path("_synced/admon_factories")
-    if pth_admon.is_dir() and copier_dict.get("sync_admon_factories") != "true":
-        _log(f"Removing {pth_admon}. To keep, set 'sync_admon_factories=true'")
-        shutil.rmtree(pth_admon)
+    pth_admon_dir = (
+        CWD / f"mdformat_{copier_dict['plugin_name']}" / "_synced/admon_factories"
+    )
+    if pth_admon_dir.is_dir() and copier_dict.get("sync_admon_factories") != "true":
+        _log(f"Removing {pth_admon_dir}. To keep, set 'sync_admon_factories=true'")
+        shutil.rmtree(pth_admon_dir)
 
 
 def delete_myself() -> None:
