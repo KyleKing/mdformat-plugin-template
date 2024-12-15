@@ -134,43 +134,49 @@ all = true
 in_place = true
 trailing_comma_inline_array = true
 
+[tool.tomlsort.overrides."tool.tox.env.*"]
+inline_arrays = false
+
 [tool.tox]
+basepython = ["python3.12", "python3.9"]
 # Docs: https://tox.wiki/en/4.23.2/config.html#core
-envlist = [
-  "py{312}-beartype",
-  "py{312}-mypy",
-  "py{312}-pre-commit",
-  "py{312}-ruff",
-  "py{39}-cov",
-  "py{39}-hook",
-]
+env_list = ["py12-test", "py312-pre-commit", "py312-ruff", "py312-type", "py39-hook", "py39-test"]
 isolated_build = true
+requires = ["tox>=4.20.0"]
 skip_missing_interpreters = false
 
-[tool.tox."py{312}-beartype"]
-commands = "pytest posargs --ff --nf -vv --exitfirst --beartype-packages='mdformat_{{ plugin_name }}'"
-extras = "test"
+[tool.tox.env."py12-test"]
+commands = [["pytest", "--cov=mdformat_{{ plugin_name }}", {default = [], extend = true, replace = "posargs"}]]
+deps = ["--requirement=tests/requirements.txt"]
+description = "Optionally, specify: '--exitfirst --failed-first --new-first -vv --beartype-packages=mdformat_{{ plugin_name }}'"
 
-[tool.tox."py{312}-mypy"]
-commands = "mypy ./mdformat_{{ plugin_name }}"
-deps = "mypy>=1.13.0"
-
-[tool.tox."py{312}-pre-commit"]
-commands = "pre-commit run posargs:--all-files"
+[tool.tox.env."py312-pre-commit"]
+commands = [["pre-commit", "run", "--all-files", {default = [], extend = true, replace = "posargs"}]]
 deps = "pre-commit>=4.0.1"
-
-[tool.tox."py{312}-ruff"]
-commands = [
-  "ruff check . --fix --unsafe-fixes",
-  "ruff format .",
-]
-deps = "ruff>=0.8.3"
 skip_install = true
 
-[tool.tox."py{39}-cov"]
-commands = "pytest --cov=mdformat_{{ plugin_name }} posargs"
-extras = "test"
+[tool.tox.env."py312-ruff"]
+commands = [
+  ["ruff", "check", ".", "--fix", {default = [], extend = true, replace = "posargs"}],
+  ["ruff", "format", "."],
+]
+deps = "ruff>=0.8.3"
+description = "Optionally, specify: '--unsafe-fixes'"
+skip_install = true
 
-[tool.tox."py{39}-hook"]
-commands = "pre-commit run --config .pre-commit-test.yaml posargs:--all-files --verbose --show-diff-on-failure"
+[tool.tox.env."py312-type"]
+commands = [["mypy", "./mdformat_{{ plugin_name }}", {default = [], extend = true, replace = "posargs"}]]
+deps = ["mypy>=1.13.0"]
+
+[tool.tox.env."py39-hook"]
+commands = [["pre-commit", "run", "--config=.pre-commit-test.yaml", "--all-files", {default = ["--show-diff-on-failure", "--verbose"], extend = true, replace = "posargs"}]]
 deps = "pre-commit>=4.0.1"
+skip_install = true
+
+[tool.tox.env."py39-test"]
+commands = [["pytest", "--cov=mdformat_{{ plugin_name }}"]]
+deps = ["--requirement=tests/requirements.txt"]
+
+[tool.tox.env_run_base]
+# Validates that commands are set
+commands = [["error-commands-are-not-set"]]

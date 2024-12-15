@@ -108,3 +108,6 @@ convention = "google"
 all = true
 in_place = true
 trailing_comma_inline_array = true
+
+[tool.tomlsort.overrides."tool.tox.env.*"]
+inline_arrays = false
