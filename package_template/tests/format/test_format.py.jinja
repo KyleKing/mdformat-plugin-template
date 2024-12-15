@@ -20,7 +20,7 @@ def flatten(nested_list: list[list[T]]) -> list[T]:
 fixtures = flatten(
     [
         read_fixture_file(Path(__file__).parent / "fixtures" / fixture_path)
-        for fixture_path in ("{{ plugin_name }}.md")
+        for fixture_path in ("{{ plugin_name }}.md",)
     ],
 )
 
@@ -30,7 +30,7 @@ fixtures = flatten(
     fixtures,
     ids=[f[1] for f in fixtures],
 )
-def test_material_content_tabs_fixtures(line, title, text, expected):
+def test_format_fixtures(line, title, text, expected):
     output = mdformat.text(text, extensions={"{{ plugin_name }}"})
     print_text(output, expected)
     assert output.rstrip() == expected.rstrip()
