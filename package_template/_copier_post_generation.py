@@ -36,12 +36,13 @@ def evaluate_configuration() -> None:
         if ":" in line
     }
 
-    pth_admon_dir = (
-        CWD / f"mdformat_{copier_dict['plugin_name']}" / "_synced/admon_factories"
-    )
-    if pth_admon_dir.is_dir() and copier_dict.get("sync_admon_factories") != "true":
-        _log(f"Removing {pth_admon_dir}. To keep, set 'sync_admon_factories=true'")
-        shutil.rmtree(pth_admon_dir)
+    sync_dir = CWD / f"mdformat_{copier_dict['plugin_name']}" / "_synced"
+    admon_dir = sync_dir / "admon_factories"
+    if admon_dir.is_dir() and copier_dict.get("sync_admon_factories") != "true":
+        _log(f"Removing {admon_dir}. To keep, set 'sync_admon_factories=true'")
+        shutil.rmtree(admon_dir)
+    if not any(Path(subdirectory).is_dir() for subdirectory in sync_dir.iterdir()):
+        shutil.rmtree(sync_dir)
 
 
 def delete_myself() -> None:
