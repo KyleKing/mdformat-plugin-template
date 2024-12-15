@@ -1,3 +1,9 @@
+## 1.1.4 (2024-12-15)
+
+### Fix
+
+- remove synced and init if no subdirectories
+
 ## 1.1.3 (2024-12-15)
 
 ### Fix
