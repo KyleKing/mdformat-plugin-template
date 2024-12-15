@@ -1,3 +1,9 @@
+## 1.1.2 (2024-12-15)
+
+### Fix
+
+- resolve tox and toml-sort conflicts
+
 ## 1.1.1 (2024-12-14)
 
 ### Fix
