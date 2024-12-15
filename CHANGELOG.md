@@ -1,3 +1,9 @@
+## 1.1.3 (2024-12-15)
+
+### Fix
+
+- address naming and minor nits
+
 ## 1.1.2 (2024-12-15)
 
 ### Fix
