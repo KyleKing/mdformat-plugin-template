@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from argparse import ArgumentParser
+import argparse
 from collections.abc import Mapping
 
 from markdown_it import MarkdownIt
@@ -12,9 +12,13 @@ from mdformat.renderer.typing import Postprocess, Render
 from .mdit_plugins import eb_plugin_example_plugin
 
 
-def add_cli_options(parser: ArgumentParser) -> None:
-    """Add options to the mdformat CLI, to be stored in `mdit.options["mdformat"]`."""
-    parser.add_argument(
+def add_cli_argument_group(group: argparse._ArgumentGroup) -> None:
+    """Add options to the mdformat CLI.
+
+    Stored in `mdit.options["mdformat"]["plugin"]["tables"]`
+
+    """
+    group.add_argument(
         "--argument",
         action="store_true",
         help="If specified, store true",
