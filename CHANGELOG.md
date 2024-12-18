@@ -1,3 +1,9 @@
+## 1.1.6 (2024-12-18)
+
+### Fix
+
+- address CLI deprecation warning
+
 ## 1.1.5 (2024-12-15)
 
 ### Fix
