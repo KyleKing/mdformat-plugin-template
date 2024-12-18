@@ -15,7 +15,7 @@ from .mdit_plugins import eb_plugin_example_plugin
 def add_cli_argument_group(group: argparse._ArgumentGroup) -> None:
     """Add options to the mdformat CLI.
 
-    Stored in `mdit.options["mdformat"]["plugin"]["tables"]`
+    Stored in `mdit.options["mdformat"]["plugin"]["eb_plugin_example"]`
 
     """
     group.add_argument(
