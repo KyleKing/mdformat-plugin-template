@@ -1,3 +1,9 @@
+## 1.1.8 (2025-04-09)
+
+### Fix
+
+- store_const to prevent default value
+
 ## 1.1.7 (2025-04-09)
 
 ### Fix
