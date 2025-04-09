@@ -20,7 +20,8 @@ def add_cli_argument_group(group: argparse._ArgumentGroup) -> None:
     """
     group.add_argument(
         "--argument",
-        action="store_true",
+        action="store_const",
+        const=True,
         help="If specified, store true",
     )
 
