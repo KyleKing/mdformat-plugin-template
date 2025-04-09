@@ -1,3 +1,13 @@
+## 1.1.7 (2025-04-09)
+
+### Fix
+
+- correct documentation of TOML config
+
+### Refactor
+
+- modify conditional for loading conf
+
 ## 1.1.6 (2024-12-18)
 
 ### Fix
