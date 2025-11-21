@@ -156,21 +156,25 @@ requires = ["tox>=4.32.0"]
 skip_missing_interpreters = false
 
 [tool.tox.env.cz]
+basepython = "python3.14"
 commands = [["cz", "bump", {default = [], extend = true, replace = "posargs"}]]
 deps = "commitizen>=4.10.0"
 description = "Bump version using commitizen. Optionally specify: '-- --increment MAJOR|MINOR|PATCH' or '-- --dry-run'"
 skip_install = true
 
 [tool.tox.env."hook-min"]
+basepython = "python3.10"
 commands = [["prek", "run", "--config=.pre-commit-test.yaml", "--all-files", {default = ["--show-diff-on-failure", "--verbose"], extend = true, replace = "posargs"}]]
 deps = "prek>=0.2.17"
 
 [tool.tox.env.prek]
+basepython = "python3.14"
 commands = [["prek", "run", "--all-files", {default = [], extend = true, replace = "posargs"}]]
 deps = "prek>=0.2.17"
 skip_install = true
 
 [tool.tox.env.ruff]
+basepython = "python3.14"
 commands = [
   ["ruff", "check", ".", "--fix", {default = [], extend = true, replace = "posargs"}],
   ["ruff", "format", "."],
@@ -180,6 +184,7 @@ description = "Optionally, specify: '-- --unsafe-fixes'"
 skip_install = true
 
 [tool.tox.env.test]
+basepython = "python3.14"
 commands = [["pytest", "--cov=mdformat_eb_plugin_example", {default = [], extend = true, replace = "posargs"}]]
 # PLANNED: requires support for TYPE_CHECKING https://github.com/beartype/beartype/issues/477
 # description = "Optionally, specify: '-- --exitfirst --failed-first --new-first -vv --beartype-packages=mdformat_eb_plugin_example"
@@ -187,10 +192,12 @@ description = "Optionally, specify: '-- --exitfirst --failed-first --new-first -
 extras = ["test"]
 
 [tool.tox.env."test-min"]
+basepython = "python3.10"
 commands = [["pytest", "--cov=mdformat_eb_plugin_example"]]
 extras = ["test"]
 
 [tool.tox.env.type]
+basepython = "python3.14"
 commands = [["mypy", "./mdformat_eb_plugin_example", {default = [], extend = true, replace = "posargs"}]]
 deps = ["mypy>=1.18.2"]
 
