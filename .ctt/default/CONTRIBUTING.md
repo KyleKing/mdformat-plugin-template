@@ -44,6 +44,7 @@ or directly with [prek](https://github.com/j178/prek) (or pre-commit)
 uv tool install prek
 # or: pipx install prek, brew install prek, etc.
 
+prek install -f
 prek run --all
 ```
 

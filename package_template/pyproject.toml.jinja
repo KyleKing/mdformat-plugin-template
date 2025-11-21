@@ -28,8 +28,8 @@ requires-python = ">=3.10.0"
 [project.optional-dependencies]
 test = [
   "pytest >= 8.3.4",
-  "pytest-beartype >= 0.1.1",
-  "pytest-cov >= 6.0.0",
+  "pytest-beartype >= 0.2.0",
+  "pytest-cov >= 6.2.1",
 ]
 
 [project.urls]
@@ -65,9 +65,11 @@ pythonVersion = "3.10"
 [tool.pytest-watcher]
 ignore_patterns = []
 now = true
-patterns = ["*.md", "*.py"]
+patterns = ["*.ambr", "*.md", "*.py"]
 runner = "tox"
-runner_args = ["-e", "py312-test", "--", "--exitfirst", "--failed-first", "--new-first", "-vv", "--beartype-packages=mdformat_{{ plugin_name }}"]
+# PLANNED: requires support for TYPE_CHECKING https://github.com/beartype/beartype/issues/477
+# runner_args = ["-e", "py312-test", "--", "--exitfirst", "--failed-first", "--new-first", "-vv", "--beartype-packages=mdformat_{{ plugin_name }}"]
+runner_args = ["-e", "py312-test", "--", "--exitfirst", "--failed-first", "--new-first", "-vv"]
 
 [tool.ruff]
 # Docs: https://github.com/charliermarsh/ruff
@@ -80,11 +82,13 @@ ignore = [
   'ANN002', # Missing type annotation for `*args`
   'ANN003', # Missing type annotation for `**kwargs`
   'BLE001', # Do not catch blind exception: `Exception`
+  'COM812', #  missing-trailing-comma
   'CPY001', # Missing copyright notice at top of file
   'D203', # "1 blank line required before class docstring" (Conflicts with D211)
   'D213', # "Multi-line docstring summary should start at the second line" (Conflicts with D212)
   'DOC201', # `return` is not documented in docstring
   'DOC402', # `yield` is not documented in docstring
+  'E501', # Line too long (89 > 88)
   'EM101', # Exception must not use a string literal, assign to variable first
   'FBT001', # Boolean-typed positional argument in function definition
   'FIX001', # Line contains FIXME
@@ -143,22 +147,22 @@ inline_arrays = false
 [tool.tox]
 # Docs: https://tox.wiki/en/4.23.2/config.html#core
 basepython = ["python3.10", "python3.12"]
-env_list = ["py310-hook", "py310-test", "py312-pre-commit", "py312-ruff", "py312-test", "py312-type"]
+env_list = ["py310-hook", "py310-test", "py312-prek", "py312-ruff", "py312-test", "py312-type"]
 isolated_build = true
-requires = ["tox>=4.20.0"]
+requires = ["tox>=4.32.0"]
 skip_missing_interpreters = false
 
 [tool.tox.env."py310-hook"]
-commands = [["pre-commit", "run", "--config=.pre-commit-test.yaml", "--all-files", {default = ["--show-diff-on-failure", "--verbose"], extend = true, replace = "posargs"}]]
-deps = "pre-commit>=4.0.1"
+commands = [["prek", "run", "--config=.pre-commit-test.yaml", "--all-files", {default = ["--show-diff-on-failure", "--verbose"], extend = true, replace = "posargs"}]]
+deps = "prek>=0.2.17"
 
 [tool.tox.env."py310-test"]
 commands = [["pytest", "--cov=mdformat_{{ plugin_name }}"]]
 extras = ["test"]
 
-[tool.tox.env."py312-pre-commit"]
-commands = [["pre-commit", "run", "--all-files", {default = [], extend = true, replace = "posargs"}]]
-deps = "pre-commit>=4.0.1"
+[tool.tox.env."py312-prek"]
+commands = [["prek", "run", "--all-files", {default = [], extend = true, replace = "posargs"}]]
+deps = "prek>=0.2.17"
 skip_install = true
 
 [tool.tox.env."py312-ruff"]
@@ -166,18 +170,20 @@ commands = [
   ["ruff", "check", ".", "--fix", {default = [], extend = true, replace = "posargs"}],
   ["ruff", "format", "."],
 ]
-deps = "ruff>=0.8.3"
+deps = "ruff>=0.14.5"
 description = "Optionally, specify: '-- --unsafe-fixes'"
 skip_install = true
 
 [tool.tox.env."py312-test"]
 commands = [["pytest", "--cov=mdformat_{{ plugin_name }}", {default = [], extend = true, replace = "posargs"}]]
-description = "Optionally, specify: '-- --exitfirst --failed-first --new-first -vv --beartype-packages=mdformat_{{ plugin_name }}'"
+# PLANNED: requires support for TYPE_CHECKING https://github.com/beartype/beartype/issues/477
+# description = "Optionally, specify: '-- --exitfirst --failed-first --new-first -vv --beartype-packages=mdformat_{{ plugin_name }}"
+description = "Optionally, specify: '-- --exitfirst --failed-first --new-first -vv"
 extras = ["test"]
 
 [tool.tox.env."py312-type"]
 commands = [["mypy", "./mdformat_{{ plugin_name }}", {default = [], extend = true, replace = "posargs"}]]
-deps = ["mypy>=1.13.0"]
+deps = ["mypy>=1.18.2"]
 
 [tool.tox.env_run_base]
 # Validates that commands are set
