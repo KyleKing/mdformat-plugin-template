@@ -1,3 +1,9 @@
+## 2.1.0 (2025-11-21)
+
+### Feat
+
+- improvements from mdformat-mkdocs
+
 ## 2.0.0 (2025-11-21)
 
 ### Feat
