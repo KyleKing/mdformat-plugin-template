@@ -1,3 +1,21 @@
+## 2.2.0 (2025-11-21)
+
+### Feat
+
+- use commitizen for versioning
+- migrate to uv_build
+- migrate from flit to uv for package building
+- migrate to PyPI Trusted Publishers for secure token-free publishing
+
+### Fix
+
+- resolve Jinja formating errors and missing uv_build configuration
+- convert Action to templated jinja file
+
+### Refactor
+
+- exclusion rules for top-level files aren't necessary
+
 ## 2.1.3 (2025-11-21)
 
 ### Fix
