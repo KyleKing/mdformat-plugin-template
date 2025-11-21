@@ -38,12 +38,13 @@ To run the code formatting and style checks:
 tox -e py312-pre-commit
 ```
 
-or directly
+or directly with [prek](https://github.com/j178/prek) (or pre-commit)
 
 ```bash
-uv tool install pre-commit
-# or: pipx install pre-commit
-pre-commit run --all
+uv tool install prek
+# or: pipx install prek, brew install prek, etc.
+
+prek run --all
 ```
 
 To run the pre-commit hook test:

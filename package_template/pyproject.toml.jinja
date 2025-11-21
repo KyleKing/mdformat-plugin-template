@@ -142,11 +142,19 @@ inline_arrays = false
 
 [tool.tox]
 # Docs: https://tox.wiki/en/4.23.2/config.html#core
-basepython = ["python3.12", "python3.10"]
-env_list = ["py312-pre-commit", "py312-ruff", "py312-test", "py312-type", "py310-hook", "py310-test"]
+basepython = ["python3.10", "python3.12"]
+env_list = ["py310-hook", "py310-test", "py312-pre-commit", "py312-ruff", "py312-test", "py312-type"]
 isolated_build = true
 requires = ["tox>=4.20.0"]
 skip_missing_interpreters = false
+
+[tool.tox.env."py310-hook"]
+commands = [["pre-commit", "run", "--config=.pre-commit-test.yaml", "--all-files", {default = ["--show-diff-on-failure", "--verbose"], extend = true, replace = "posargs"}]]
+deps = "pre-commit>=4.0.1"
+
+[tool.tox.env."py310-test"]
+commands = [["pytest", "--cov=mdformat_{{ plugin_name }}"]]
+extras = ["test"]
 
 [tool.tox.env."py312-pre-commit"]
 commands = [["pre-commit", "run", "--all-files", {default = [], extend = true, replace = "posargs"}]]
@@ -170,14 +178,6 @@ extras = ["test"]
 [tool.tox.env."py312-type"]
 commands = [["mypy", "./mdformat_{{ plugin_name }}", {default = [], extend = true, replace = "posargs"}]]
 deps = ["mypy>=1.13.0"]
-
-[tool.tox.env."py310-hook"]
-commands = [["pre-commit", "run", "--config=.pre-commit-test.yaml", "--all-files", {default = ["--show-diff-on-failure", "--verbose"], extend = true, replace = "posargs"}]]
-deps = "pre-commit>=4.0.1"
-
-[tool.tox.env."py310-test"]
-commands = [["pytest", "--cov=mdformat_{{ plugin_name }}"]]
-extras = ["test"]
 
 [tool.tox.env_run_base]
 # Validates that commands are set

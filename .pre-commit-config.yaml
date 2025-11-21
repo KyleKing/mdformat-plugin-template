@@ -18,17 +18,17 @@ exclude: CHANGELOG\.md|poetry\.lock
 
 repos:
   - repo: https://github.com/kyleking/copier-template-tester
-    rev: 2.1.4
+    rev: 2.2.0
     hooks:
       - id: copier-template-tester
   # Enforce commits that CD Action will recognize for auto-releases
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v4.1.0
+    rev: v4.10.0
     hooks:
       - id: commitizen
   # Sync below config with 'package_template'
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       - id: check-added-large-files
       - id: check-executables-have-shebangs
@@ -63,12 +63,12 @@ repos:
         exclude: tests/.+\.md
         stages: ["pre-commit"]
   - repo: https://github.com/adrienverge/yamllint.git
-    rev: v1.35.1
+    rev: v1.37.1
     hooks:
       - id: yamllint
         stages: ["pre-commit"]
   - repo: https://github.com/pappasam/toml-sort
-    rev: v0.24.2
+    rev: v0.24.3
     hooks:
       - id: toml-sort-fix
         stages: ["pre-commit"]
