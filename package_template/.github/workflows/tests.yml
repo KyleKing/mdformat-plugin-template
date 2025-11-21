@@ -68,21 +68,27 @@ jobs:
     needs: [prek, tests, prek-hook]
     if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags')
     runs-on: ubuntu-latest
-    # Fix 403 error (https://github.com/softprops/action-gh-release/issues/400)
+    environment:
+      name: pypi
+      url: https://pypi.org/p/{{ package_name_kebab }}
     permissions:
-      contents: write
+      contents: write  # For GitHub release creation
+      id-token: write  # IMPORTANT: mandatory for PyPI trusted publishing
     steps:
       - name: Checkout source
         uses: actions/checkout@v5
-      - name: install flit
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: 3.12
+      - name: Install flit
         run: |
-          pipx install flit~=3.10.1
-      - name: Build and publish
+          pip install flit~=3.10.1
+      - name: Build package
         run: |
-          flit publish
-        env:
-          FLIT_USERNAME: __token__
-          FLIT_PASSWORD: ${{ secrets.PYPI_KEY }}
+          flit build
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
       - name: Generate GitHub Release Notes
         uses: softprops/action-gh-release@v2
         with:
