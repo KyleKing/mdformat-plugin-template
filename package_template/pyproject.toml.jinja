@@ -1,6 +1,6 @@
 [build-system]
-build-backend = "flit_core.buildapi"
-requires = ["flit_core >=3.9.0,<4"]
+build-backend = "uv_build"
+requires = ["uv_build>=0.9.10"]
 
 [project]
 authors = [
@@ -16,30 +16,28 @@ dependencies = [
   "mdformat >= 0.7.19",
   "mdit-py-plugins >= 0.4.1",
 ]
-dynamic = ["description", "version"]
 keywords = ["markdown", "markdown-it", "mdformat", "mdformat_plugin_template"]
+license = "MIT"
+license-files = ["LICENSE"]
 name = "mdformat_{{ plugin_name }}"
 readme = "README.md"
 requires-python = ">=3.10.0"
+version = "0.0.1"
 
 [project.entry-points."mdformat.parser_extension"]
 {{ plugin_name }} = "mdformat_{{ plugin_name }}"
 
 [project.optional-dependencies]
 test = [
-  "pytest >= 8.3.4",
+  "pytest >= 9.0.1",
   "pytest-beartype >= 0.2.0",
-  "pytest-cov >= 6.2.1",
+  "pytest-cov >= 7.0.0",
 ]
 
 [project.urls]
 "Bug Tracker" = "{{ repository_url }}/issues"
 "Changelog" = "{{ repository_url }}/releases"
 homepage = "{{ repository_url }}"
-
-[tool.flit.sdist]
-exclude = [".github/", "tests/"]
-include = []
 
 [tool.mypy]
 check_untyped_defs = true
@@ -188,3 +186,6 @@ deps = ["mypy>=1.18.2"]
 [tool.tox.env_run_base]
 # Validates that commands are set
 commands = [["error-commands-are-not-set"]]
+
+[tool.uv.build-backend]
+module-root = ""

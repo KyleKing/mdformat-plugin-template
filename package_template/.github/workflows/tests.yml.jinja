@@ -19,7 +19,7 @@ jobs:
       - uses: j178/prek-action@v1
 
   tests:
-    runs-on: ${{ matrix.os }}
+    runs-on: {% raw %}${{ matrix.os }}{% endraw %}
     strategy:
       matrix:
         python-version: ["3.10", "3.12"]
@@ -29,7 +29,7 @@ jobs:
       - name: Install uv and Python
         uses: astral-sh/setup-uv@v7
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: {% raw %}${{ matrix.python-version }}{% endraw %}
       - name: Install Package
         run: uv pip install --system .[test]
       - name: Run pytest
@@ -59,7 +59,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: pypi
-      url: https://pypi.org/p/mdformat-eb-plugin-example
+      url: https://pypi.org/p/{{ package_name_kebab }}
     permissions:
       contents: write  # For GitHub release creation
       id-token: write  # IMPORTANT: mandatory for PyPI trusted publishing
