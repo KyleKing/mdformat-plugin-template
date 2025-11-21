@@ -102,12 +102,13 @@ Before publishing for the first time, you need to configure Trusted Publishing o
 
 ### Publishing a Release
 
-Update the version in `mdformat_eb_plugin_example/__init__.py`, commit the change, and push a tag in format: `v#.#.#` (e.g. `v1.3.2` for `__version__ = '1.3.2'`):
+Update the versions in both `pyproject.toml` under `[project].version` and `mdformat_eb_plugin_example/__init__.py` for `__version__`. Commit the change and push a tag in the form `vX.Y.Z` (for example, `v1.3.2` when the project version is `1.3.2`):
 
 ```sh
-git add mdformat_eb_plugin_example/__init__.py
-git commit -m "bump: version X.Y.Z"
-git tag v1.3.2
+TAG=1.3.2
+git add pyproject.toml mdformat_eb_plugin_example/__init__.py
+git commit -m "release: v$TAG"
+git tag v$TAG
 git push origin main --tags
 ```
 
