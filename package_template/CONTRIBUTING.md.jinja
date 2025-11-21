@@ -9,7 +9,7 @@ A collection of useful resources to reference when developing new features:
 
 ## Local Development
 
-This package utilizes [uv](https://docs.astral.sh/uv/) as the build engine, and [tox](https://tox.readthedocs.io) for test automation.
+This package utilizes [uv](https://docs.astral.sh/uv) as the build engine, and [tox](https://tox.readthedocs.io) for test automation.
 
 To install these development dependencies:
 
@@ -35,7 +35,7 @@ The easiest way to write tests, is to edit `tests/fixtures.md`
 To run the code formatting and style checks:
 
 ```bash
-tox -e py312-pre-commit
+tox -e py312-prek
 ```
 
 or directly with [prek](https://github.com/j178/prek) (or pre-commit)
@@ -87,12 +87,12 @@ This project uses [PyPI Trusted Publishers](https://docs.pypi.org/trusted-publis
 
 Before publishing for the first time, you need to configure Trusted Publishing on PyPI:
 
-1. Go to your project's page on PyPI: `https://pypi.org/manage/project/{{ package_name_kebab }}/settings/publishing/`
+1. Go to your project's page on PyPI: `https://pypi.org/manage/project/mdformat_{{ plugin_name }}/settings/publishing/`
    - If the project doesn't exist yet, go to [PyPI's publishing page](https://pypi.org/manage/account/publishing/) to add a "pending" publisher
 2. Add a new Trusted Publisher with these settings:
-   - **PyPI Project Name**: `{{ package_name_kebab }}`
-   - **Owner**: Your GitHub username or organization
-   - **Repository name**: Your repository name
+   - **PyPI Project Name**: `mdformat_{{ plugin_name }}`
+   - **Owner**: `{{ repository_namespace }}`
+   - **Repository name**: `{{ package_name_kebab }}`
    - **Workflow name**: `tests.yml`
    - **Environment name**: `pypi`
 3. Configure the GitHub Environment:
@@ -112,26 +112,3 @@ git push origin main --tags
 ```
 
 The GitHub Action will automatically build and publish to PyPI using Trusted Publishers (no API tokens needed!).
-
-### Local Publishing (Alternative)
-
-If you need to publish locally for testing, you can use uv with an API token:
-
-```bash
-# Build the package
-uv build
-
-# Publish to PyPI (requires token)
-# envchain --set UV UV_PUBLISH_TOKEN
-export UV_PUBLISH_TOKEN="<your-pypi-token>"
-uv publish
-```
-
-Or to publish to TestPyPI first:
-
-```bash
-uv publish --publish-url https://test.pypi.org/legacy/
-```
-
-> [!NOTE]
-> The GitHub Action approach using Trusted Publishers is strongly recommended as it's more secure (no long-lived tokens) and includes automatic digital attestations for all distribution files.

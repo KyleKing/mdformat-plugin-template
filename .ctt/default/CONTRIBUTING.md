@@ -9,7 +9,7 @@ A collection of useful resources to reference when developing new features:
 
 ## Local Development
 
-This package utilizes [flit](https://flit.readthedocs.io) as the build engine, and [tox](https://tox.readthedocs.io) for test automation.
+This package utilizes [uv](https://docs.astral.sh/uv) as the build engine, and [tox](https://tox.readthedocs.io) for test automation.
 
 To install these development dependencies:
 
@@ -35,7 +35,7 @@ The easiest way to write tests, is to edit `tests/fixtures.md`
 To run the code formatting and style checks:
 
 ```bash
-tox -e py312-pre-commit
+tox -e py312-prek
 ```
 
 or directly with [prek](https://github.com/j178/prek) (or pre-commit)
@@ -81,19 +81,34 @@ pipx install . --include-deps --force --editable
 
 ## Publish to PyPi
 
-First, update the version in `mdformat_eb_plugin_example/__init__.py`
+This project uses [PyPI Trusted Publishers](https://docs.pypi.org/trusted-publishers/) for secure, token-free publishing from GitHub Actions, with [uv](https://docs.astral.sh/uv/) for building packages.
 
-Then, either use the Github Action by committing the new version in `__init__.py` and pushing an associated tag in format: `v#.#.#` (e.g. `v1.3.2` for `__version__ = '1.3.2'`)
+### Initial Setup (One-time)
 
-Or run flit locally:
+Before publishing for the first time, you need to configure Trusted Publishing on PyPI:
+
+1. Go to your project's page on PyPI: `https://pypi.org/manage/project/mdformat_eb_plugin_example/settings/publishing/`
+    - If the project doesn't exist yet, go to [PyPI's publishing page](https://pypi.org/manage/account/publishing/) to add a "pending" publisher
+1. Add a new Trusted Publisher with these settings:
+    - **PyPI Project Name**: `mdformat_eb_plugin_example`
+    - **Owner**: `executablebooks`
+    - **Repository name**: `mdformat-eb-plugin-example`
+    - **Workflow name**: `tests.yml`
+    - **Environment name**: `pypi`
+1. Configure the GitHub Environment:
+    - Go to your repository's `Settings` → `Environments`
+    - Create an environment named `pypi`
+    - (Recommended) Enable "Required reviewers" for production safety
+
+### Publishing a Release
+
+Update the version in `mdformat_eb_plugin_example/__init__.py`, commit the change, and push a tag in format: `v#.#.#` (e.g. `v1.3.2` for `__version__ = '1.3.2'`):
 
 ```bash
-# envchain --set FLIT FLIT_PASSWORD
-export FLIT_USERNAME=__token__
-export eval $(envchain FLIT env | grep FLIT_PASSWORD=)
-
-flit publish
+git add mdformat_eb_plugin_example/__init__.py
+git commit -m "bump: version X.Y.Z"
+git tag v1.3.2
+git push origin main --tags
 ```
 
-> [!NOTE]
-> The Github Action requires generating an API key on PyPi and adding it to the repository `Settings/Secrets`, under the name `PYPI_KEY`
+The GitHub Action will automatically build and publish to PyPI using Trusted Publishers (no API tokens needed!).

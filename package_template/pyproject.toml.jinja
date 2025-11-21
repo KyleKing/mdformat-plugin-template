@@ -1,6 +1,6 @@
 [build-system]
-build-backend = "hatchling.build"
-requires = ["hatchling"]
+requires = ["uv_build>=0.9.10"]
+build-backend = "uv_build"
 
 [project]
 authors = [
@@ -16,7 +16,6 @@ dependencies = [
   "mdformat >= 0.7.19",
   "mdit-py-plugins >= 0.4.1",
 ]
-dynamic = ["description", "version"]
 keywords = ["markdown", "markdown-it", "mdformat", "mdformat_plugin_template"]
 name = "mdformat_{{ plugin_name }}"
 readme = "README.md"
@@ -27,18 +26,15 @@ requires-python = ">=3.10.0"
 
 [project.optional-dependencies]
 test = [
-  "pytest >= 8.3.4",
+  "pytest >= 9.0.1",
   "pytest-beartype >= 0.2.0",
-  "pytest-cov >= 6.2.1",
+  "pytest-cov >= 7.0.0",
 ]
 
 [project.urls]
 "Bug Tracker" = "{{ repository_url }}/issues"
 "Changelog" = "{{ repository_url }}/releases"
 homepage = "{{ repository_url }}"
-
-[tool.hatch.build.targets.sdist]
-exclude = ["/.github", "/tests"]
 
 [tool.mypy]
 check_untyped_defs = true
@@ -187,3 +183,21 @@ deps = ["mypy>=1.18.2"]
 [tool.tox.env_run_base]
 # Validates that commands are set
 commands = [["error-commands-are-not-set"]]
+
+[tool.uv.build-backend]
+exclude = [
+  ".github/",
+  ".gitignore",
+  ".pre-commit-config.yaml",
+  ".pre-commit-test.yaml",
+  ".tool-versions",
+  ".yamllint.yaml",
+  "AGENTS.md",
+  "CLAUDE.md",
+  "CONTRIBUTING.md",
+  "LICENSE",
+  "README.md",
+  "tests/",
+  "{{ _copier_conf.answers_file }}",
+]
+module-root = ""
