@@ -1,3 +1,9 @@
+## 2.2.1 (2025-11-21)
+
+### Fix
+
+- remove `--system` from uv install
+
 ## 2.2.0 (2025-11-21)
 
 ### Feat
