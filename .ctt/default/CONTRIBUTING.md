@@ -27,7 +27,7 @@ tox
 and with test coverage:
 
 ```bash
-tox -e py310-test
+tox -e min-test
 ```
 
 The easiest way to write tests, is to edit `tests/fixtures.md`
@@ -35,7 +35,7 @@ The easiest way to write tests, is to edit `tests/fixtures.md`
 To run the code formatting and style checks:
 
 ```bash
-tox -e py312-prek
+tox -e latest-prek
 ```
 
 or directly with [prek](https://github.com/j178/prek) (or pre-commit)
@@ -51,7 +51,7 @@ prek run --all
 To run the pre-commit hook test:
 
 ```bash
-tox -e py310-hook
+tox -e min-hook
 ```
 
 ## `ptw` testing
@@ -108,13 +108,13 @@ Use commitizen to automatically bump versions and create a commit with tag:
 
 ```sh
 # Dry run to preview the version bump
-tox -e py312-cz -- --dry-run
+tox -e latest-cz -- --dry-run
 
 # Automatically bump version based on conventional commits
-tox -e py312-cz
+tox -e latest-cz
 
 # Or manually specify the increment type
-tox -e py312-cz -- --increment PATCH  # or MINOR or MAJOR
+tox -e latest-cz -- --increment PATCH  # or MINOR or MAJOR
 
 # Push the commit and tag
 git push origin main --tags

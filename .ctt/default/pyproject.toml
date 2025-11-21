@@ -71,8 +71,8 @@ now = true
 patterns = ["*.ambr", "*.md", "*.py"]
 runner = "tox"
 # PLANNED: requires support for TYPE_CHECKING https://github.com/beartype/beartype/issues/477
-# runner_args = ["-e", "py312-test", "--", "--exitfirst", "--failed-first", "--new-first", "-vv", "--beartype-packages=mdformat_eb_plugin_example"]
-runner_args = ["-e", "py312-test", "--", "--exitfirst", "--failed-first", "--new-first", "-vv"]
+# runner_args = ["-e", "latest-test", "--", "--exitfirst", "--failed-first", "--new-first", "-vv", "--beartype-packages=mdformat_eb_plugin_example"]
+runner_args = ["-e", "latest-test", "--", "--exitfirst", "--failed-first", "--new-first", "-vv"]
 
 [tool.ruff]
 # Docs: https://github.com/charliermarsh/ruff
@@ -149,32 +149,32 @@ inline_arrays = false
 
 [tool.tox]
 # Docs: https://tox.wiki/en/4.23.2/config.html#core
-basepython = ["python3.10", "python3.12"]
-env_list = ["py310-hook", "py310-test", "py312-cz", "py312-prek", "py312-ruff", "py312-test", "py312-type"]
+basepython = ["python3.10", "python3.14"]
+env_list = ["min-hook", "min-test", "latest-cz", "latest-prek", "latest-ruff", "latest-test", "latest-type"]
 isolated_build = true
 requires = ["tox>=4.32.0"]
 skip_missing_interpreters = false
 
-[tool.tox.env."py310-hook"]
+[tool.tox.env."min-hook"]
 commands = [["prek", "run", "--config=.pre-commit-test.yaml", "--all-files", {default = ["--show-diff-on-failure", "--verbose"], extend = true, replace = "posargs"}]]
 deps = "prek>=0.2.17"
 
-[tool.tox.env."py310-test"]
+[tool.tox.env."min-test"]
 commands = [["pytest", "--cov=mdformat_eb_plugin_example"]]
 extras = ["test"]
 
-[tool.tox.env."py312-cz"]
+[tool.tox.env."latest-cz"]
 commands = [["cz", "bump", {default = [], extend = true, replace = "posargs"}]]
 deps = "commitizen>=4.10.0"
 description = "Bump version using commitizen. Optionally specify: '-- --increment MAJOR|MINOR|PATCH' or '-- --dry-run'"
 skip_install = true
 
-[tool.tox.env."py312-prek"]
+[tool.tox.env."latest-prek"]
 commands = [["prek", "run", "--all-files", {default = [], extend = true, replace = "posargs"}]]
 deps = "prek>=0.2.17"
 skip_install = true
 
-[tool.tox.env."py312-ruff"]
+[tool.tox.env."latest-ruff"]
 commands = [
   ["ruff", "check", ".", "--fix", {default = [], extend = true, replace = "posargs"}],
   ["ruff", "format", "."],
@@ -183,14 +183,14 @@ deps = "ruff>=0.14.5"
 description = "Optionally, specify: '-- --unsafe-fixes'"
 skip_install = true
 
-[tool.tox.env."py312-test"]
+[tool.tox.env."latest-test"]
 commands = [["pytest", "--cov=mdformat_eb_plugin_example", {default = [], extend = true, replace = "posargs"}]]
 # PLANNED: requires support for TYPE_CHECKING https://github.com/beartype/beartype/issues/477
 # description = "Optionally, specify: '-- --exitfirst --failed-first --new-first -vv --beartype-packages=mdformat_eb_plugin_example"
 description = "Optionally, specify: '-- --exitfirst --failed-first --new-first -vv"
 extras = ["test"]
 
-[tool.tox.env."py312-type"]
+[tool.tox.env."latest-type"]
 commands = [["mypy", "./mdformat_eb_plugin_example", {default = [], extend = true, replace = "posargs"}]]
 deps = ["mypy>=1.18.2"]
 
