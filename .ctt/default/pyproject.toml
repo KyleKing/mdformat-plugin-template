@@ -1,6 +1,6 @@
 [build-system]
-build-backend = "flit_core.buildapi"
-requires = ["flit_core >=3.9.0,<4"]
+build-backend = "uv_build"
+requires = ["uv_build>=0.9.10"]
 
 [project]
 authors = [
@@ -16,30 +16,28 @@ dependencies = [
   "mdformat >= 0.7.19",
   "mdit-py-plugins >= 0.4.1",
 ]
-dynamic = ["description", "version"]
 keywords = ["markdown", "markdown-it", "mdformat", "mdformat_plugin_template"]
+license = "MIT"
+license-files = ["LICENSE"]
 name = "mdformat_eb_plugin_example"
 readme = "README.md"
 requires-python = ">=3.10.0"
+version = "0.0.1"
 
 [project.entry-points."mdformat.parser_extension"]
 eb_plugin_example = "mdformat_eb_plugin_example"
 
 [project.optional-dependencies]
 test = [
-  "pytest >= 8.3.4",
+  "pytest >= 9.0.1",
   "pytest-beartype >= 0.2.0",
-  "pytest-cov >= 6.2.1",
+  "pytest-cov >= 7.0.0",
 ]
 
 [project.urls]
 "Bug Tracker" = "https://github.com/executablebooks/mdformat-eb-plugin-example/issues"
 "Changelog" = "https://github.com/executablebooks/mdformat-eb-plugin-example/releases"
 homepage = "https://github.com/executablebooks/mdformat-eb-plugin-example"
-
-[tool.flit.sdist]
-exclude = [".github/", "tests/"]
-include = []
 
 [tool.mypy]
 check_untyped_defs = true
@@ -188,3 +186,19 @@ deps = ["mypy>=1.18.2"]
 [tool.tox.env_run_base]
 # Validates that commands are set
 commands = [["error-commands-are-not-set"]]
+
+[tool.uv.build-backend]
+exclude = [
+  ".copier-answers.yml",
+  ".github/",
+  ".gitignore",
+  ".pre-commit-config.yaml",
+  ".pre-commit-test.yaml",
+  ".tool-versions",
+  ".yamllint.yaml",
+  "AGENTS.md",
+  "CLAUDE.md",
+  "CONTRIBUTING.md",
+  "tests/",
+]
+module-root = ""

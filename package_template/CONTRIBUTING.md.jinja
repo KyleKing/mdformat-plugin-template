@@ -88,17 +88,17 @@ This project uses [PyPI Trusted Publishers](https://docs.pypi.org/trusted-publis
 Before publishing for the first time, you need to configure Trusted Publishing on PyPI:
 
 1. Go to your project's page on PyPI: `https://pypi.org/manage/project/mdformat_{{ plugin_name }}/settings/publishing/`
-   - If the project doesn't exist yet, go to [PyPI's publishing page](https://pypi.org/manage/account/publishing/) to add a "pending" publisher
-2. Add a new Trusted Publisher with these settings:
-   - **PyPI Project Name**: `mdformat_{{ plugin_name }}`
-   - **Owner**: `{{ repository_namespace }}`
-   - **Repository name**: `{{ package_name_kebab }}`
-   - **Workflow name**: `tests.yml`
-   - **Environment name**: `pypi`
-3. Configure the GitHub Environment:
-   - Go to your repository's `Settings` → `Environments`
-   - Create an environment named `pypi`
-   - (Recommended) Enable "Required reviewers" for production safety
+    - If the project doesn't exist yet, go to [PyPI's publishing page](https://pypi.org/manage/account/publishing/) to add a "pending" publisher
+1. Add a new Trusted Publisher with these settings:
+    - **PyPI Project Name**: `mdformat_{{ plugin_name }}`
+    - **Owner**: `{{ repository_namespace }}`
+    - **Repository name**: `{{ package_name_kebab }}`
+    - **Workflow name**: `tests.yml`
+    - **Environment name**: `pypi`
+1. Configure the GitHub Environment:
+    - Go to your repository's `Settings` → `Environments`
+    - Create an environment named `pypi`
+    - (Recommended) Enable "Required reviewers" for production safety
 
 ### Publishing a Release
 

@@ -1,6 +1,6 @@
 [build-system]
-requires = ["uv_build>=0.9.10"]
 build-backend = "uv_build"
+requires = ["uv_build>=0.9.10"]
 
 [project]
 authors = [
@@ -17,9 +17,12 @@ dependencies = [
   "mdit-py-plugins >= 0.4.1",
 ]
 keywords = ["markdown", "markdown-it", "mdformat", "mdformat_plugin_template"]
+license = "MIT"
+license-files = ["LICENSE"]
 name = "mdformat_{{ plugin_name }}"
 readme = "README.md"
 requires-python = ">=3.10.0"
+version = "0.0.1"
 
 [project.entry-points."mdformat.parser_extension"]
 {{ plugin_name }} = "mdformat_{{ plugin_name }}"
@@ -186,6 +189,7 @@ commands = [["error-commands-are-not-set"]]
 
 [tool.uv.build-backend]
 exclude = [
+  "{{ _copier_conf.answers_file }}",
   ".github/",
   ".gitignore",
   ".pre-commit-config.yaml",
@@ -195,9 +199,6 @@ exclude = [
   "AGENTS.md",
   "CLAUDE.md",
   "CONTRIBUTING.md",
-  "LICENSE",
-  "README.md",
   "tests/",
-  "{{ _copier_conf.answers_file }}",
 ]
 module-root = ""

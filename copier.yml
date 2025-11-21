@@ -7,6 +7,10 @@ _subdirectory: package_template
 _tasks:
   - git init
   - python _copier_post_generation.py
+_migrations:
+  - version: v2.1.1
+    command: prek install -f
+    when: "{{ _stage == 'after' }}"
 
 _message_after_copy: |
   The 'mdformat_{{ plugin_name }}' package has been initialized!
