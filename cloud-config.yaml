@@ -1,0 +1,133 @@
+#cloud-config
+# Hetzner Cloud-Init Configuration for mdformat-plugin-template
+# Replace VARIABLES in ALL CAPS before deployment
+
+users:
+  - name: YOUR_USERNAME
+    groups: users, admin, sudo
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - YOUR_SSH_PUBLIC_KEY_HERE
+
+packages:
+  - git
+  - curl
+  - wget
+  - build-essential
+  - syncthing
+
+write_files:
+  # Auto-deploy script
+  - path: /usr/local/bin/auto-deploy.sh
+    permissions: '0755'
+    content: |
+      #!/bin/bash
+      set -euo pipefail
+
+      APP_DIR="/opt/mdformat-plugin-template"
+      LOG_FILE="/var/log/auto-deploy.log"
+
+      echo "[$(date)] Starting auto-deploy" | tee -a "$LOG_FILE"
+
+      cd "$APP_DIR"
+
+      # Fetch latest changes
+      git fetch origin main
+
+      # Check if there are new commits
+      LOCAL=$(git rev-parse HEAD)
+      REMOTE=$(git rev-parse origin/main)
+
+      if [ "$LOCAL" != "$REMOTE" ]; then
+        echo "[$(date)] New commits detected, updating..." | tee -a "$LOG_FILE"
+        git pull origin main
+
+        # Install/update dependencies with mise
+        /home/YOUR_USERNAME/.local/bin/mise install
+
+        echo "[$(date)] Deploy complete" | tee -a "$LOG_FILE"
+      else
+        echo "[$(date)] Already up to date" | tee -a "$LOG_FILE"
+      fi
+
+  # Auto-deploy systemd service
+  - path: /etc/systemd/system/auto-deploy.service
+    permissions: '0644'
+    content: |
+      [Unit]
+      Description=Auto-deploy mdformat-plugin-template
+      After=network-online.target
+      Wants=network-online.target
+
+      [Service]
+      Type=oneshot
+      User=YOUR_USERNAME
+      ExecStart=/usr/local/bin/auto-deploy.sh
+      StandardOutput=journal
+      StandardError=journal
+
+  # Auto-deploy systemd timer (runs every 5 minutes)
+  - path: /etc/systemd/system/auto-deploy.timer
+    permissions: '0644'
+    content: |
+      [Unit]
+      Description=Auto-deploy timer
+
+      [Timer]
+      OnBootSec=2min
+      OnUnitActiveSec=5min
+
+      [Install]
+      WantedBy=timers.target
+
+  # Syncthing systemd service
+  - path: /etc/systemd/system/syncthing@.service
+    permissions: '0644'
+    content: |
+      [Unit]
+      Description=Syncthing for %i
+      After=network.target
+
+      [Service]
+      User=%i
+      ExecStart=/usr/bin/syncthing serve --no-browser --no-restart --logflags=0
+      Restart=on-failure
+      RestartSec=5
+      SuccessExitStatus=3 4
+      RestartForceExitStatus=3 4
+
+      [Install]
+      WantedBy=multi-user.target
+
+runcmd:
+  # Install mise
+  - su - YOUR_USERNAME -c 'curl https://mise.run | sh'
+  - su - YOUR_USERNAME -c 'echo "eval \"\$(~/.local/bin/mise activate bash)\"" >> ~/.bashrc'
+
+  # Clone repository
+  - git clone https://github.com/YOUR_GITHUB_USERNAME/mdformat-plugin-template.git /opt/mdformat-plugin-template
+  - chown -R YOUR_USERNAME:YOUR_USERNAME /opt/mdformat-plugin-template
+
+  # Setup mise for the project
+  - su - YOUR_USERNAME -c 'cd /opt/mdformat-plugin-template && ~/.local/bin/mise install'
+
+  # Enable and start auto-deploy timer
+  - systemctl daemon-reload
+  - systemctl enable auto-deploy.timer
+  - systemctl start auto-deploy.timer
+
+  # Enable and start Syncthing
+  - systemctl enable syncthing@YOUR_USERNAME.service
+  - systemctl start syncthing@YOUR_USERNAME.service
+
+  # Configure SSH
+  - sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
+  - sed -i 's/#PubkeyAuthentication yes/PubkeyAuthentication yes/' /etc/ssh/sshd_config
+  - systemctl restart sshd
+
+# Set timezone
+timezone: UTC
+
+# Auto-reboot if kernel is updated
+package_reboot_if_required: true
