@@ -14,8 +14,8 @@ This package utilizes [flit](https://flit.readthedocs.io) as the build engine, a
 To install these development dependencies:
 
 ```bash
-pipx install tox
-# or: uv tool install tox --with tox-uv
+uv tool install tox --with tox-uv
+# or: pipx install tox
 ```
 
 To run the tests:
@@ -27,7 +27,7 @@ tox
 and with test coverage:
 
 ```bash
-tox -e py39-cov
+tox -e py310-test
 ```
 
 The easiest way to write tests, is to edit `tests/fixtures.md`
@@ -41,15 +41,15 @@ tox -e py312-pre-commit
 or directly
 
 ```bash
-pipx install pre-commit
-# or: uv tool install pre-commit
+uv tool install pre-commit
+# or: pipx install pre-commit
 pre-commit run --all
 ```
 
 To run the pre-commit hook test:
 
 ```bash
-tox -e py39-hook
+tox -e py310-hook
 ```
 
 ## `ptw` testing
@@ -57,23 +57,24 @@ tox -e py39-hook
 See configuration in `pyproject.toml` for `[tool.pytest-watcher]`
 
 ```sh
-pipx install pytest-watcher
+uv tool install pytest-watcher
+# or: pipx install pytest-watcher
 
 ptw .
 ```
 
-## Local pipx testing
+## Local uv/pipx testing
 
-Run the latest local code anywhere with pipx.
-
-```sh
-pipx install . --include-deps --force --editable
-```
-
-Or with uv:
+Run the latest local code anywhere with uv tool.
 
 ```sh
 uv tool install mdformat --force --with-editable=.
+```
+
+Or with pipx:
+
+```sh
+pipx install . --include-deps --force --editable
 ```
 
 ## Publish to PyPi
