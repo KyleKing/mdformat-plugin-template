@@ -1,3 +1,9 @@
+## 2.1.3 (2025-11-21)
+
+### Fix
+
+- correct typo in CI for prek
+
 ## 2.1.2 (2025-11-21)
 
 ### Fix
