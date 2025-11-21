@@ -9,7 +9,7 @@ A collection of useful resources to reference when developing new features:
 
 ## Local Development
 
-This package utilizes [flit](https://flit.readthedocs.io) as the build engine, and [tox](https://tox.readthedocs.io) for test automation.
+This package utilizes [uv](https://docs.astral.sh/uv/) as the build engine, and [tox](https://tox.readthedocs.io) for test automation.
 
 To install these development dependencies:
 
@@ -81,7 +81,7 @@ pipx install . --include-deps --force --editable
 
 ## Publish to PyPi
 
-This project uses [PyPI Trusted Publishers](https://docs.pypi.org/trusted-publishers/) for secure, token-free publishing from GitHub Actions.
+This project uses [PyPI Trusted Publishers](https://docs.pypi.org/trusted-publishers/) for secure, token-free publishing from GitHub Actions, with [uv](https://docs.astral.sh/uv/) for building packages.
 
 ### Initial Setup (One-time)
 
@@ -115,14 +115,22 @@ The GitHub Action will automatically build and publish to PyPI using Trusted Pub
 
 ### Local Publishing (Alternative)
 
-If you need to publish locally for testing, you can still use flit with an API token:
+If you need to publish locally for testing, you can use uv with an API token:
 
 ```bash
-# envchain --set FLIT FLIT_PASSWORD
-export FLIT_USERNAME=__token__
-export eval $(envchain FLIT env | grep FLIT_PASSWORD=)
+# Build the package
+uv build
 
-flit publish
+# Publish to PyPI (requires token)
+# envchain --set UV UV_PUBLISH_TOKEN
+export UV_PUBLISH_TOKEN="<your-pypi-token>"
+uv publish
+```
+
+Or to publish to TestPyPI first:
+
+```bash
+uv publish --publish-url https://test.pypi.org/legacy/
 ```
 
 > [!NOTE]

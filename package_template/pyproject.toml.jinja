@@ -1,6 +1,6 @@
 [build-system]
-build-backend = "flit_core.buildapi"
-requires = ["flit_core >=3.9.0,<4"]
+build-backend = "hatchling.build"
+requires = ["hatchling"]
 
 [project]
 authors = [
@@ -37,9 +37,8 @@ test = [
 "Changelog" = "{{ repository_url }}/releases"
 homepage = "{{ repository_url }}"
 
-[tool.flit.sdist]
-exclude = [".github/", "tests/"]
-include = []
+[tool.hatch.build.targets.sdist]
+exclude = ["/.github", "/tests"]
 
 [tool.mypy]
 check_untyped_defs = true

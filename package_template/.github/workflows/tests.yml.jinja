@@ -26,17 +26,13 @@ jobs:
         os: [ubuntu-latest, windows-latest]
     steps:
       - uses: actions/checkout@v5
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v6
-        with:
-          python-version: ${{ matrix.python-version }}
-      - name: Installation (deps and package)
-        # We install with flit --pth-file, so that coverage will be recorded for the module
-        # Flit could be installed with pipx and use '--python=$(which python)', but
-        #  there were issues with the Windows Runner
+        run: uv python install ${{ matrix.python-version }}
+      - name: Install dependencies and package
         run: |
-          pip install flit~=3.10.1
-          flit install --deps=production --extras=test --pth-file
+          uv pip install -e .[test]
       - name: Run pytest
         run: |
           pytest --cov
@@ -77,16 +73,11 @@ jobs:
     steps:
       - name: Checkout source
         uses: actions/checkout@v5
-      - name: Set up Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: 3.12
-      - name: Install flit
-        run: |
-          pip install flit~=3.10.1
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
       - name: Build package
         run: |
-          flit build
+          uv build
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
       - name: Generate GitHub Release Notes
