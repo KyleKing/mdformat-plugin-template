@@ -15,18 +15,18 @@ readme = "README.md"
 version = "1.1.8"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.10"
 tomlkit = ">=0.12.5"
 
 [tool.pyright]
 include = ["mdformat_eb_plugin_example", "tests"]
-pythonVersion = "3.9"
+pythonVersion = "3.10"
 
 [tool.ruff]
 # Docs: https://github.com/charliermarsh/ruff
 # Tip: poetry run python -m ruff --explain RUF100
 line-length = 88
-target-version = 'py39'
+target-version = 'py310'
 
 [tool.ruff.lint]
 ignore = [

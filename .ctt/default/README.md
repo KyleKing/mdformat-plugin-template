@@ -8,7 +8,7 @@ An [mdformat](https://github.com/executablebooks/mdformat) plugin for `<placehol
 
 Add this package wherever you use `mdformat` and the plugin will be auto-recognized. No additional configuration necessary. See [additional information on `mdformat` plugins here](https://mdformat.readthedocs.io/en/stable/users/plugins.html)
 
-### Pre-Commit
+### pre-commit / prek
 
 ```yaml
 repos:
@@ -20,17 +20,17 @@ repos:
           - mdformat-eb-plugin-example
 ```
 
-### pipx/uv
+### uvx
+
+```sh
+uvx --from mdformat-eb-plugin-example mdformat
+```
+
+Or with pipx:
 
 ```sh
 pipx install mdformat
 pipx inject mdformat mdformat-eb-plugin-example
-```
-
-Or with uv:
-
-```sh
-uv tool run --from mdformat-eb-plugin-example mdformat
 ```
 
 ## HTML Rendering
