@@ -15,7 +15,7 @@ readme = "README.md"
 version = "1.1.8"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.10"
 tomlkit = ">=0.12.5"
 
 [tool.pyright]
