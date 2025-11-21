@@ -69,7 +69,7 @@ ptw .
 Run the latest local code anywhere with uv tool.
 
 ```sh
-uv tool install mdformat --force --with-editable=.
+uv tool install . --editable --force --with="mdformat>=0.7.19"
 ```
 
 Or with pipx:
