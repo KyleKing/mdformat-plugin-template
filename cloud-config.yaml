@@ -1,11 +1,24 @@
 #cloud-config
 # Hetzner Cloud-Init Configuration for mdformat-plugin-template
-# Replace VARIABLES in ALL CAPS before deployment
+#
+# ⚠️  REQUIRED: Replace ALL variables in ALL CAPS before deployment
+#
+# CHECKLIST:
+# [ ] YOUR_USERNAME - Your preferred username (e.g., deploy)
+# [ ] YOUR_SSH_PUBLIC_KEY_HERE - Full SSH public key from ~/.ssh/id_rsa.pub
+# [ ] YOUR_GITHUB_USERNAME - GitHub username for repository access
+# [ ] Review passwordless sudo configuration (see security note below)
+
+# SECURITY NOTE: This configuration grants passwordless sudo for convenience.
+# For production, consider:
+#   1. Restrict sudo to specific commands: "sudo: /usr/bin/systemctl, /usr/local/bin/auto-deploy.sh"
+#   2. Require passwords: Remove NOPASSWD
+#   3. Use SSH key constraints: Add command= restrictions in authorized_keys
 
 users:
   - name: YOUR_USERNAME
     groups: users, admin, sudo
-    sudo: ALL=(ALL) NOPASSWD:ALL
+    sudo: ALL=(ALL) NOPASSWD:ALL  # ⚠️  See security note above
     shell: /bin/bash
     ssh_authorized_keys:
       - YOUR_SSH_PUBLIC_KEY_HERE
@@ -18,6 +31,16 @@ packages:
   - syncthing
 
 write_files:
+  # SSH hardening - drop-in configuration
+  - path: /etc/ssh/sshd_config.d/50-hardening.conf
+    permissions: '0644'
+    content: |
+      # Hardened SSH configuration
+      PasswordAuthentication no
+      PubkeyAuthentication yes
+      PermitRootLogin no
+      X11Forwarding no
+
   # Auto-deploy script
   - path: /usr/local/bin/auto-deploy.sh
     permissions: '0755'
@@ -25,30 +48,55 @@ write_files:
       #!/bin/bash
       set -euo pipefail
 
+      APP_USER="YOUR_USERNAME"
       APP_DIR="/opt/mdformat-plugin-template"
-      LOG_FILE="/var/log/auto-deploy.log"
+      LOG_DIR="/home/$APP_USER/.local/var/log"
+      LOG_FILE="$LOG_DIR/auto-deploy.log"
 
-      echo "[$(date)] Starting auto-deploy" | tee -a "$LOG_FILE"
+      # Ensure log directory exists
+      mkdir -p "$LOG_DIR"
 
-      cd "$APP_DIR"
+      log() {
+        echo "[$(date -Iseconds)] $*" | tee -a "$LOG_FILE"
+      }
+
+      log "Starting auto-deploy"
+
+      if [ ! -d "$APP_DIR" ]; then
+        log "ERROR: App directory $APP_DIR does not exist"
+        exit 1
+      fi
+
+      cd "$APP_DIR" || { log "ERROR: Cannot cd to $APP_DIR"; exit 1; }
 
       # Fetch latest changes
-      git fetch origin main
+      if ! git fetch origin main; then
+        log "ERROR: git fetch failed"
+        exit 1
+      fi
 
       # Check if there are new commits
       LOCAL=$(git rev-parse HEAD)
       REMOTE=$(git rev-parse origin/main)
 
       if [ "$LOCAL" != "$REMOTE" ]; then
-        echo "[$(date)] New commits detected, updating..." | tee -a "$LOG_FILE"
-        git pull origin main
+        log "New commits detected, updating..."
+
+        if ! git pull origin main; then
+          log "ERROR: git pull failed"
+          exit 1
+        fi
 
         # Install/update dependencies with mise
-        /home/YOUR_USERNAME/.local/bin/mise install
+        log "Installing dependencies with mise..."
+        if ! /home/$APP_USER/.local/bin/mise install; then
+          log "ERROR: mise install failed"
+          exit 1
+        fi
 
-        echo "[$(date)] Deploy complete" | tee -a "$LOG_FILE"
+        log "Deploy complete"
       else
-        echo "[$(date)] Already up to date" | tee -a "$LOG_FILE"
+        log "Already up to date"
       fi
 
   # Auto-deploy systemd service
@@ -67,16 +115,20 @@ write_files:
       StandardOutput=journal
       StandardError=journal
 
+      [Install]
+      WantedBy=multi-user.target
+
   # Auto-deploy systemd timer (runs every 5 minutes)
   - path: /etc/systemd/system/auto-deploy.timer
     permissions: '0644'
     content: |
       [Unit]
-      Description=Auto-deploy timer
+      Description=Auto-deploy timer for mdformat-plugin-template
 
       [Timer]
       OnBootSec=2min
       OnUnitActiveSec=5min
+      Persistent=true
 
       [Install]
       WantedBy=timers.target
@@ -101,16 +153,29 @@ write_files:
       WantedBy=multi-user.target
 
 runcmd:
-  # Install mise
-  - su - YOUR_USERNAME -c 'curl https://mise.run | sh'
-  - su - YOUR_USERNAME -c 'echo "eval \"\$(~/.local/bin/mise activate bash)\"" >> ~/.bashrc'
+  # SECURITY NOTE: Installing mise via piped remote script
+  # This command downloads and executes code from the internet
+  # In production, consider:
+  #   1. Verifying checksums
+  #   2. Pinning specific versions
+  #   3. Self-hosting installation scripts
 
-  # Clone repository
-  - git clone https://github.com/YOUR_GITHUB_USERNAME/mdformat-plugin-template.git /opt/mdformat-plugin-template
+  # Install mise (using explicit path to avoid tilde expansion issues)
+  - su - YOUR_USERNAME -c 'curl https://mise.run | sh'
+  - su - YOUR_USERNAME -c 'echo "eval \"\$(/home/YOUR_USERNAME/.local/bin/mise activate bash)\"" >> /home/YOUR_USERNAME/.bashrc'
+
+  # Clone repository with error handling
+  - >
+    if ! git clone https://github.com/YOUR_GITHUB_USERNAME/mdformat-plugin-template.git /opt/mdformat-plugin-template; then
+      echo "ERROR: Failed to clone repository" >&2;
+      exit 1;
+    fi
   - chown -R YOUR_USERNAME:YOUR_USERNAME /opt/mdformat-plugin-template
 
-  # Setup mise for the project
-  - su - YOUR_USERNAME -c 'cd /opt/mdformat-plugin-template && ~/.local/bin/mise install'
+  # Setup mise for the project with error handling
+  - >
+    su - YOUR_USERNAME -c 'cd /opt/mdformat-plugin-template && /home/YOUR_USERNAME/.local/bin/mise install' ||
+    { echo "ERROR: mise install failed" >&2; exit 1; }
 
   # Enable and start auto-deploy timer
   - systemctl daemon-reload
@@ -121,9 +186,7 @@ runcmd:
   - systemctl enable syncthing@YOUR_USERNAME.service
   - systemctl start syncthing@YOUR_USERNAME.service
 
-  # Configure SSH
-  - sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
-  - sed -i 's/#PubkeyAuthentication yes/PubkeyAuthentication yes/' /etc/ssh/sshd_config
+  # Restart SSH to apply hardening configuration
   - systemctl restart sshd
 
 # Set timezone
@@ -131,3 +194,7 @@ timezone: UTC
 
 # Auto-reboot if kernel is updated
 package_reboot_if_required: true
+
+# Run package updates on first boot
+package_update: true
+package_upgrade: true
