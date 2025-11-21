@@ -79,21 +79,21 @@ Or with pipx:
 pipx install . --include-deps --force --editable
 ```
 
-## Publish to PyPi
+## Publish to PyPI
 
-This project uses [PyPI Trusted Publishers](https://docs.pypi.org/trusted-publishers/) for secure, token-free publishing from GitHub Actions, with [uv](https://docs.astral.sh/uv/) for building packages.
+This project uses [PyPI Trusted Publishers](https://docs.pypi.org/trusted-publishers) for secure, token-free publishing from GitHub Actions, with [uv](https://docs.astral.sh/uv) for building packages.
 
 ### Initial Setup (One-time)
 
 Before publishing for the first time, you need to configure Trusted Publishing on PyPI:
 
 1. Go to your project's page on PyPI: `https://pypi.org/manage/project/mdformat_eb_plugin_example/settings/publishing/`
-    - If the project doesn't exist yet, go to [PyPI's publishing page](https://pypi.org/manage/account/publishing/) to add a "pending" publisher
+    - If the project doesn't exist yet, go to [PyPI's publishing page](https://pypi.org/manage/account/publishing) to add a "pending" publisher
 1. Add a new Trusted Publisher with these settings:
     - **PyPI Project Name**: `mdformat_eb_plugin_example`
     - **Owner**: `executablebooks`
     - **Repository name**: `mdformat-eb-plugin-example`
-    - **Workflow name**: `tests.yml`
+    - **Workflow name**: `tests.yml` (`.github/workflows/tests.yml`)
     - **Environment name**: `pypi`
 1. Configure the GitHub Environment:
     - Go to your repository's `Settings` → `Environments`
@@ -104,7 +104,7 @@ Before publishing for the first time, you need to configure Trusted Publishing o
 
 Update the version in `mdformat_eb_plugin_example/__init__.py`, commit the change, and push a tag in format: `v#.#.#` (e.g. `v1.3.2` for `__version__ = '1.3.2'`):
 
-```bash
+```sh
 git add mdformat_eb_plugin_example/__init__.py
 git commit -m "bump: version X.Y.Z"
 git tag v1.3.2
