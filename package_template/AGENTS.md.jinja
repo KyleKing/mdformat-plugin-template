@@ -6,42 +6,42 @@
 # Run all tests using tox
 tox
 
-# Run tests with coverage (Python 3.10 - minimum version)
-tox -e min-test
+# Run tests with coverage (Python 3.14 - current version)
+tox -e test
 
-# Run tests with coverage (Python 3.14 - latest version)
-tox -e latest-test
+# Run tests with coverage (Python 3.10 - minimum version)
+tox -e test-min
 
 # Run specific tests with pytest flags
-tox -e latest-test -- --exitfirst --failed-first --new-first -vv --snapshot-update
+tox -e test -- --exitfirst --failed-first --new-first -vv --snapshot-update
 ```
 
 ## Linting and Formatting
 
 ```bash
 # Run all pre-commit hooks (using prek)
-tox -e latest-prek
+tox -e prek
 # Or run directly with prek
 prek run --all
 
 # Run ruff for linting and formatting
-tox -e latest-ruff
+tox -e ruff
 # With unsafe fixes
-tox -e latest-ruff -- --unsafe-fixes
+tox -e ruff -- --unsafe-fixes
 ```
 
 ## Type Checking
 
 ```bash
 # Run mypy type checking
-tox -e latest-type
+tox -e type
 ```
 
 ## Pre-commit Hook Testing
 
 ```bash
 # Test the plugin as a pre-commit hook
-tox -e min-hook
+tox -e hook-min
 ```
 
 ## Architecture
