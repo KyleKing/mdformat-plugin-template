@@ -188,17 +188,4 @@ deps = ["mypy>=1.18.2"]
 commands = [["error-commands-are-not-set"]]
 
 [tool.uv.build-backend]
-exclude = [
-  "{{ _copier_conf.answers_file }}",
-  ".github/",
-  ".gitignore",
-  ".pre-commit-config.yaml",
-  ".pre-commit-test.yaml",
-  ".tool-versions",
-  ".yamllint.yaml",
-  "AGENTS.md",
-  "CLAUDE.md",
-  "CONTRIBUTING.md",
-  "tests/",
-]
 module-root = ""
