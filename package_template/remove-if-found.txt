@@ -1,4 +1,5 @@
 .ruff.toml
+.tool-versions
 tests/format/fixtures.md
 tests/format/test_fixtures.py
 tox.ini

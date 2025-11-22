@@ -14,7 +14,7 @@ def merge() -> None:
     tl_pyproject = Path("pyproject.toml")
     tl_doc = tomlkit.parse(tl_pyproject.read_text())
 
-    synced_keys = {*ctt_doc["tool"].keys()} - {"flit", "pytest-watcher", "mypy", "tox"}
+    synced_keys = {*ctt_doc["tool"].keys()} - {"pytest-watcher", "mypy", "tox", "commitizen", "uv"}
     for key in synced_keys:
         tl_doc["tool"][key] = ctt_doc["tool"][key]
 

@@ -1,0 +1,6 @@
+[tools]
+uv = "latest"
+python = ["3.10.15", "3.14.0"]
+"pipx:prek" = "latest"
+"pipx:tox" = {version = "4.32.0", uvx_args = "--with tox-uv==1.29.0"}
+"pipx:pytest-watcher" = "latest"

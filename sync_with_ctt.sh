@@ -3,6 +3,7 @@
 # Convenience script to sync latest .ctt configuration files with the top-level template
 
 cp .ctt/default/.yamllint.yaml .yamllint.yaml
+cp package_template/mise.toml mise.toml
 
 poetry run python sync_pyproject.py
 
