@@ -1,3 +1,10 @@
+## 2.4.2 (2025-11-22)
+
+### Fix
+
+- set tox basepythons correctly
+- properly sort mise.toml
+
 ## 2.4.1 (2025-11-22)
 
 ### Fix
