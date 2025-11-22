@@ -1,3 +1,9 @@
+## 2.4.3 (2025-11-22)
+
+### Fix
+
+- don't run cz and both tests by default with `tox`
+
 ## 2.4.2 (2025-11-22)
 
 ### Fix
