@@ -7,12 +7,10 @@ _subdirectory: package_template
 _tasks:
   - git init
   - python _copier_post_generation.py
+  - touch mise.lock
 _migrations:
   - version: v2.1.1
     command: prek install -f
-    when: "{{ _stage == 'after' }}"
-  - version: v2.3.0
-    command: touch mise.lock
     when: "{{ _stage == 'after' }}"
 
 _message_after_copy: |
