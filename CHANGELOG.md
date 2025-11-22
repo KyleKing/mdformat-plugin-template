@@ -1,3 +1,9 @@
+## 2.4.1 (2025-11-22)
+
+### Fix
+
+- run touch mise.lock always
+
 ## 2.4.0 (2025-11-22)
 
 ### Feat
