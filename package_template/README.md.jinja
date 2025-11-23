@@ -23,7 +23,7 @@ repos:
 ### uvx
 
 ```sh
-uvx --from {{ package_name_kebab }} mdformat
+uvx --with {{ package_name_kebab }} mdformat
 ```
 
 Or with pipx:
@@ -56,7 +56,7 @@ md.render(text)
 
 See [CONTRIBUTING.md]({{ repository_url }}/blob/main/CONTRIBUTING.md)
 
-[ci-badge]: {{ repository_url }}/workflows/CI/badge.svg?branch=main
+[ci-badge]: {{ repository_url }}/actions/workflows/tests.yml/badge.svg?branch=main
 [ci-link]: {{ repository_url }}/actions?query=workflow%3ACI+branch%3Amain+event%3Apush
 [pypi-badge]: https://img.shields.io/pypi/v/{{ package_name_kebab }}.svg
 [pypi-link]: https://pypi.org/project/{{ package_name_kebab }}

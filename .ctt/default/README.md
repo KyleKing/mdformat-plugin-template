@@ -23,7 +23,7 @@ repos:
 ### uvx
 
 ```sh
-uvx --from mdformat-eb-plugin-example mdformat
+uvx --with mdformat-eb-plugin-example mdformat
 ```
 
 Or with pipx:
@@ -56,7 +56,7 @@ md.render(text)
 
 See [CONTRIBUTING.md](https://github.com/executablebooks/mdformat-eb-plugin-example/blob/main/CONTRIBUTING.md)
 
-[ci-badge]: https://github.com/executablebooks/mdformat-eb-plugin-example/workflows/CI/badge.svg?branch=main
+[ci-badge]: https://github.com/executablebooks/mdformat-eb-plugin-example/actions/workflows/tests.yml/badge.svg?branch=main
 [ci-link]: https://github.com/executablebooks/mdformat-eb-plugin-example/actions?query=workflow%3ACI+branch%3Amain+event%3Apush
 [pypi-badge]: https://img.shields.io/pypi/v/mdformat-eb-plugin-example.svg
 [pypi-link]: https://pypi.org/project/mdformat-eb-plugin-example
