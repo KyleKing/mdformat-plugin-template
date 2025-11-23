@@ -1,3 +1,9 @@
+## 2.4.4 (2025-11-23)
+
+### Fix
+
+- correct the CI badge link and restore package description
+
 ## 2.4.3 (2025-11-22)
 
 ### Fix
