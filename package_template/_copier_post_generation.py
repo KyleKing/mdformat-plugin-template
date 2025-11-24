@@ -41,6 +41,17 @@ def evaluate_configuration() -> None:
     if admon_dir.is_dir() and copier_dict.get("sync_admon_factories") != "true":
         _log(f"Removing {admon_dir}. To keep, set 'sync_admon_factories=true'")
         shutil.rmtree(admon_dir)
+
+    blockquote_dir = sync_dir / "blockquote_factories"
+    if (
+        blockquote_dir.is_dir()
+        and copier_dict.get("sync_blockquote_factories") != "true"
+    ):
+        _log(
+            f"Removing {blockquote_dir}. To keep, set 'sync_blockquote_factories=true'"
+        )
+        shutil.rmtree(blockquote_dir)
+
     if not any(Path(subdirectory).is_dir() for subdirectory in sync_dir.iterdir()):
         shutil.rmtree(sync_dir)
 

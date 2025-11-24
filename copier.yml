@@ -72,5 +72,10 @@ copyright_date:
 
 sync_admon_factories:
   type: bool
-  help: "If True, a '_synced/factories/*' directory will be created with helpers for mdformat admonitions. Answer 'n' if not using"
+  help: "If True, a '_synced/admon_factories/*' directory will be created with helpers for mdformat admonitions. Answer 'n' if not using"
+  default: false
+
+sync_blockquote_factories:
+  type: bool
+  help: "If True, a '_synced/blockquote_factories/*' directory will be created with helpers for converting blockquotes to divs for accessibility. Answer 'n' if not using"
   default: false
