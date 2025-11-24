@@ -62,25 +62,29 @@ def blockquote_to_div_plugin_factory(
         env: EnvType,
     ) -> str:
         """Close div when blockquote contained specific content."""
-        # Look backwards to see if this closes a content-containing blockquote
-        # Find matching blockquote_open
+        # Find the matching blockquote_open by walking backwards
         level = 1
         j = idx - 1
         while j >= 0 and level > 0:
             token_type = tokens[j].type
+            j -= 1
+
             if token_type == "blockquote_close":
                 level += 1
-            elif token_type == "blockquote_open":
-                level -= 1
-                if level == 0:
-                    # Check if content follows the opening blockquote
-                    if (
-                        j + 1 < len(tokens)
-                        and tokens[j + 1].type == f"{content_prefix}_open"
-                    ):
-                        return "</div>\n"
-                    break
-            j -= 1
+                continue
+
+            if token_type != "blockquote_open":
+                continue
+
+            level -= 1
+            if level > 0:
+                continue
+
+            # Check if content follows the opening blockquote
+            if j + 1 < len(tokens) and tokens[j + 1].type == f"{content_prefix}_open":
+                return "</div>\n"
+            break
+
         # Otherwise use default blockquote rendering
         return self.renderToken(tokens, idx, options, env)
 
