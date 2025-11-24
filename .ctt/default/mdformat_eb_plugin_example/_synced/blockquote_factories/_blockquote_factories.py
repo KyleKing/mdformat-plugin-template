@@ -69,11 +69,11 @@ def blockquote_to_div_plugin_factory(
             token_type = tokens[j].type
             j -= 1
 
-            if token_type == "blockquote_close":
+            if token_type == "blockquote_close":  # noqa: S105
                 level += 1
                 continue
 
-            if token_type != "blockquote_open":
+            if token_type != "blockquote_open":  # noqa: S105
                 continue
 
             level -= 1
