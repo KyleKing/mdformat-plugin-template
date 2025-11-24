@@ -13,5 +13,5 @@ plugin_name: eb_plugin_example
 repository_namespace: executablebooks
 repository_provider: https://github.com
 repository_url: https://github.com/executablebooks/mdformat-eb-plugin-example
-sync_admon_factories: false
-sync_blockquote_factories: false
+sync_admon_factories: true
+sync_blockquote_factories: true
