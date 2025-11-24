@@ -1,3 +1,21 @@
+## 2.5.0 (2025-11-24)
+
+### Feat
+
+- add shared blockquote admon factory
+
+### Fix
+
+- add ignores on false matches for secrets
+- upgrade gitignore from GitHub Official
+- m sounds like a vowel, so use 'an mdformat'
+
+### Refactor
+
+- restore the ctt output back to default
+- reduce indentation in blockquote factory
+- turn on shared modules for .ctt/default
+
 ## 2.4.4 (2025-11-23)
 
 ### Fix
