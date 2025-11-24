@@ -23,21 +23,28 @@ repos:
       - id: copier-template-tester
   - repo: local
     hooks:
+      # Note: pre-commit hooks are tested here with 'sync_with_ctt.sh'
+      # Running pre-commit within pre-commit is possible with `pre-commit hazmat cd`,
+      #  but not advised and the existing workaround is sufficient
       - id: run-tox-ruff-in-ctt-default
         name: Run tox ruff in .ctt/default
         entry: bash -c 'cd .ctt/default/ && tox -e ruff'
         language: system
+        files: \.ctt/default/.+
         pass_filenames: false
-      - id: run-tox-test-in-ctt-default
+      - id: run-tox-test-min-in-ctt-default
         name: Run tox test in .ctt/default
-        entry: bash -c 'cd .ctt/default/ && tox -e test'
+        entry: bash -c 'cd .ctt/default/ && tox -e test-min'
         language: system
+        files: \.ctt/default/.+
         pass_filenames: false
       - id: run-tox-type-in-ctt-default
         name: Run tox type in .ctt/default
         entry: bash -c 'cd .ctt/default/ && tox -e type'
         language: system
+        files: \.ctt/default/.+
         pass_filenames: false
+
   # Enforce commits that CD Action will recognize for auto-releases
   - repo: https://github.com/commitizen-tools/commitizen
     rev: v4.10.0
