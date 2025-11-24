@@ -1,24 +1,35 @@
-a test
+Basic admonition
 .
-This is the input Markdown test,
-then below add the expected output.
+!!! note This is a note
+    This is the content of the note.
 .
-This is the input Markdown test,
-then below add the expected output.
+!!! note This is a note
+    This is the content of the note.
 .
 
-another test
+Admonition with custom marker
 .
-Some *markdown*
-
-- a
-- b
-* c
+??? warning Custom warning
+    This is a warning message.
 .
-Some *markdown*
+??? warning Custom warning
+    This is a warning message.
+.
 
-- a
-- b
+Admonition with simple tag
+.
+!!! note
+    This admonition uses a simple tag.
+.
+!!! note
+    This admonition uses a simple tag.
+.
 
-* c
+Multiple word title
+.
+/// info Multiple word title
+    This has a title with multiple words.
+.
+/// info Multiple word title
+    This has a title with multiple words.
 .

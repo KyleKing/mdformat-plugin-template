@@ -2,18 +2,16 @@
 
 from __future__ import annotations
 
+import markdown_it
 import pytest
 
 from mdformat_eb_plugin_example._synced.admon_factories import parse_tag_and_title
+from mdformat_eb_plugin_example.mdit_plugins import eb_plugin_example_plugin
 
 
 @pytest.fixture
 def md_with_plugin():
     """Fixture providing a MarkdownIt instance with the plugin applied."""
-    import markdown_it  # noqa: PLC0415
-
-    from mdformat_eb_plugin_example.mdit_plugins import eb_plugin_example_plugin  # noqa: PLC0415
-
     md = markdown_it.MarkdownIt()
     md.use(eb_plugin_example_plugin)
     return md
@@ -44,8 +42,6 @@ def test_parse_tag_and_title(input_text, expected_tags, expected_title):
 
 def test_plugin_import():
     """Test that the plugin can be imported."""
-    from mdformat_eb_plugin_example.mdit_plugins import eb_plugin_example_plugin  # noqa: PLC0415
-
     assert callable(eb_plugin_example_plugin)
 
 
