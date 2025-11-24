@@ -21,23 +21,23 @@ repos:
     rev: 2.2.0
     hooks:
       - id: copier-template-tester
-  # - repo: local
-  #   hooks:
-  #     - id: run-tox-ruff-in-ctt-default
-  #       name: Run tox ruff in .ctt/default
-  #       entry: bash -c 'cd .ctt/default/ && tox -e ruff'
-  #       language: system
-  #       pass_filenames: false
-  #     - id: run-tox-test-in-ctt-default
-  #       name: Run tox test in .ctt/default
-  #       entry: bash -c 'cd .ctt/default/ && tox -e test'
-  #       language: system
-  #       pass_filenames: false
-  #     - id: run-tox-type-in-ctt-default
-  #       name: Run tox type in .ctt/default
-  #       entry: bash -c 'cd .ctt/default/ && tox -e type'
-  #       language: system
-  #       pass_filenames: false
+  - repo: local
+    hooks:
+      - id: run-tox-ruff-in-ctt-default
+        name: Run tox ruff in .ctt/default
+        entry: bash -c 'cd .ctt/default/ && tox -e ruff'
+        language: system
+        pass_filenames: false
+      - id: run-tox-test-in-ctt-default
+        name: Run tox test in .ctt/default
+        entry: bash -c 'cd .ctt/default/ && tox -e test'
+        language: system
+        pass_filenames: false
+      - id: run-tox-type-in-ctt-default
+        name: Run tox type in .ctt/default
+        entry: bash -c 'cd .ctt/default/ && tox -e type'
+        language: system
+        pass_filenames: false
   # Enforce commits that CD Action will recognize for auto-releases
   - repo: https://github.com/commitizen-tools/commitizen
     rev: v4.10.0
