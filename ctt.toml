@@ -13,4 +13,3 @@ repository_provider = "https://github.com"
 
 [output.".ctt/default"]
 sync_admon_factories = true
-sync_blockquote_factories = true
