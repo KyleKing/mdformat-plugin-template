@@ -1,3 +1,9 @@
+## 2.5.1 (2025-11-28)
+
+### Fix
+
+- remove experimental blockquote factory
+
 ## 2.5.0 (2025-11-24)
 
 ### Feat
