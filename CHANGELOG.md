@@ -1,3 +1,9 @@
+## 2.7.0 (2025-11-29)
+
+### Feat
+
+- include the commit history in the Release
+
 ## 2.6.1 (2025-11-29)
 
 ### Fix
