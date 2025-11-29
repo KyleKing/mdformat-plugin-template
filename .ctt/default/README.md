@@ -23,7 +23,7 @@ repos:
 ### uvx
 
 ```sh
-uvx --with mdformat-eb-plugin-example mdformat
+uvx --with=mdformat-eb-plugin-example mdformat
 ```
 
 Or with pipx:
