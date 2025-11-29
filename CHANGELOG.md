@@ -1,3 +1,9 @@
+## 2.6.0 (2025-11-29)
+
+### Feat
+
+- switch to mdsf for code block formatting
+
 ## 2.5.1 (2025-11-28)
 
 ### Fix
