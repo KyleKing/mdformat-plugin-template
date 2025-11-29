@@ -1,3 +1,9 @@
+## 2.6.1 (2025-11-29)
+
+### Fix
+
+- uncomment pre-commit now that mdformat-mkdocs is fixed
+
 ## 2.6.0 (2025-11-29)
 
 ### Feat
