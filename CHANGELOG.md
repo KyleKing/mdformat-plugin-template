@@ -1,3 +1,9 @@
+## 2.7.1 (2026-01-05)
+
+### Fix
+
+- improve Agents guidance
+
 ## 2.7.0 (2025-11-29)
 
 ### Feat
