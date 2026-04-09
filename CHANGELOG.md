@@ -1,3 +1,11 @@
+## 2.7.2 (2026-04-09)
+
+### Fix
+
+- sync latest versions
+- update action versions
+- updated ruff ignores and trailing whitespace in tests
+
 ## 2.7.1 (2026-01-05)
 
 ### Fix
