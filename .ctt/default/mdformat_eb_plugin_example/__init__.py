@@ -1,3 +1,4 @@
+# ruff: noqa: RUF067
 """An mdformat plugin for `eb_plugin_example`."""
 
 __version__ = "0.0.1"
