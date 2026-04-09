@@ -1,10 +1,10 @@
 ---
 # Common commands:
-# pre-commit install
-# pre-commit autoupdate
-# pre-commit run --all-files copier-template-tester
-# pre-commit run --all-files --hook-stage commit
-# pre-commit run --all-files --hook-stage push
+# prek install
+# prek autoupdate
+# prek run --all-files copier-template-tester
+# prek run --all-files --hook-stage commit
+# prek run --all-files --hook-stage push
 # poetry run calcipy lint.pre-commit --no-update
 #
 # See https://pre-commit.com for more information
@@ -18,7 +18,7 @@ exclude: CHANGELOG\.md|poetry\.lock
 
 repos:
   - repo: https://github.com/kyleking/copier-template-tester
-    rev: 2.2.0
+    rev: 2.4.0b0
     hooks:
       - id: copier-template-tester
   - repo: local
@@ -47,7 +47,7 @@ repos:
 
   # Enforce commits that CD Action will recognize for auto-releases
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v4.10.0
+    rev: v4.13.9
     hooks:
       - id: commitizen
   # Sync below config with 'package_template'
@@ -75,24 +75,24 @@ repos:
       - id: pretty-format-json
         args: [--autofix, --indent=4]
       - id: trailing-whitespace
-        exclude: __snapshots__/.*\.ambr
+        exclude: __snapshots__/.*\.ambr|tests/format/fixtures/.+\.md
   - repo: https://github.com/executablebooks/mdformat
     rev: 1.0.0
     hooks:
       - id: mdformat
         additional_dependencies:
-          - mdformat-mkdocs[recommended-mdsf]>=5.0.1
+          - mdformat-mkdocs[recommended-mdsf]>=5.1.1
           - mdformat-gfm-alerts>=2.0.0
         args: [--wrap=no]
         exclude: tests/.+\.md
         stages: ["pre-commit"]
   - repo: https://github.com/adrienverge/yamllint.git
-    rev: v1.37.1
+    rev: v1.38.0
     hooks:
       - id: yamllint
         stages: ["pre-commit"]
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.35.0
+    rev: 0.37.1
     hooks:
       - id: check-github-workflows
         args: ["--verbose"]
@@ -101,7 +101,7 @@ repos:
         args: ["--verbose"]
         stages: ["pre-commit"]
   - repo: https://github.com/pappasam/toml-sort
-    rev: v0.24.3
+    rev: v0.24.4
     hooks:
       - id: toml-sort-fix
         stages: ["pre-commit"]
