@@ -95,6 +95,6 @@ jobs:
             echo EOF
           } >> "$GITHUB_OUTPUT"
       - name: Generate GitHub Release Notes
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           body: ${{ steps.changelog.outputs.body }}
