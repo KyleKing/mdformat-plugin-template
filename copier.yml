@@ -3,6 +3,8 @@ _min_copier_version: 9.0.0
 
 # ====== TEMPLATE ======
 _answers_file: .copier-answers.yml
+_skip_if_exists:
+  - scripts/canary_repos.py
 _subdirectory: package_template
 _tasks:
   - git init
