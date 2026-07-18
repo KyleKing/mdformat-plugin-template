@@ -1,3 +1,13 @@
+## 2.8.0 (2026-07-18)
+
+### Feat
+
+- add canary testing and hypothesis idempotency test scaffolding
+
+### Fix
+
+- use canonical ruff rule names in template to match installed ruff output
+
 ## 2.7.2 (2026-04-09)
 
 ### Fix
