@@ -1,3 +1,13 @@
+## 2.9.0 (2026-07-25)
+
+### Feat
+
+- add security guard (ReDoS/XSS) scaffolding and regex-reachability check
+
+### Refactor
+
+- move canary repos config to JSON for schema resilience
+
 ## 2.8.0 (2026-07-18)
 
 ### Feat
