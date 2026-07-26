@@ -13,7 +13,8 @@ tox -e test
 tox -e test-min
 
 # Run specific tests with pytest flags
-tox -e test -- --exitfirst --failed-first --new-first -vv --snapshot-update
+tox -e test -- --exitfirst --failed-first --new-first -vv
+# Add --snapshot-update too if the project has a snapshot library (e.g. syrupy) configured
 ```
 
 ## Linting and Formatting
@@ -36,6 +37,18 @@ tox -e ruff -- --unsafe-fixes
 # Run mypy type checking
 tox -e type
 ```
+
+## Canary Testing (Real Downstream Repos)
+
+```bash
+# Run idempotency checks against all tracked downstream repos
+tox -e canary
+
+# Test a subset by name
+tox -e canary -- some-repo another-repo
+```
+
+Clones real consumer repos via git sparse checkout and runs a two-pass idempotency check: format once, format again, compare. Not part of the default `tox` run, invoke explicitly before releasing. Configure tracked repos in `scripts/canary_repos.json`.
 
 ## Pre-commit Hook Testing
 
@@ -73,7 +86,7 @@ The package implements mdformat's plugin interface with up to four key exports i
 - `update_mdit`: Registers markdown-it parser extensions
 - `add_cli_argument_group`: Optionally adds CLI flags
 - `RENDERERS`: Maps syntax tree node types to render functions
-- `POSTPROCESSORS`: Post-processes rendered output (list normalization, inline wrapping, deflist escaping)
+- `POSTPROCESSORS`: Post-processes rendered output of a syntax node; multiple plugins can register a postprocessor for the same node type and they run in series
 
 ### Core Components
 
@@ -81,33 +94,40 @@ The package implements mdformat's plugin interface with up to four key exports i
 
 - Entry point that configures the mdformat plugin, registers all mdit_plugins, defines custom renders, and handles CLI configuration options
 
+**mdformat_eb_plugin_example/\_synced/**
+
+- Code synced from other mdformat plugins in this project family (e.g. admonition factories); check the README in each subdirectory before modifying, since changes should flow back upstream
+
 ### Configuration Options
 
 Configuration can be passed via:
 
-1. Example CLI arguments: `--cli-argument`
-1. Example TOML config file (`.mdformat.toml`):
+1. CLI argument, e.g. the scaffolded `--argument` flag
+1. TOML config file (`.mdformat.toml`):
     ```toml
     [plugin.eb_plugin_example]
-    cli_argument = true
+    argument = true
     ```
 1. API: `mdformat.text(content, extensions={"eb_plugin_example"}, options={...})`
 
-Boolean flags in `add_cli_argument_group` must use `action="store_const", const=True` (default `None`), never `action="store_true"` (default `False`). `get_conf()` treats a present-but-`False` value the same as an explicit user choice, so a `store_true` default silently overrides `cli_argument = true` set in `.mdformat.toml` whenever the CLI flag isn't passed. `mdformat`'s own CLI builder detects this and raises a `DeprecationWarning` for any plugin flag whose default isn't `None` or `argparse.SUPPRESS`.
+Two footguns to avoid:
 
-Read configuration values inside the rule/renderer function itself (e.g. call `get_conf()` from the markdown-it-py rule body, or from `RenderContext.options` in a `RENDERERS` function), not inside `update_mdit`. mdformat runs every installed extension's `update_mdit` in an order it does not guarantee, so a value read and closed over during `update_mdit` may be stale by the time a sibling extension, or the mdformat CLI/API caller, finishes configuring options. Reading at the point the rule actually runs avoids this, since by then every extension has finished registering and the options dict is final.
+- **`store_const`, not `store_true`**: boolean flags in `add_cli_argument_group` must use `action="store_const", const=True` (default `None`). A `store_true` default (`False`) is indistinguishable from an explicit choice to `get_conf()`, so it silently overrides `argument = true` from `.mdformat.toml` whenever the CLI flag isn't passed. mdformat's CLI builder raises a `DeprecationWarning` for any plugin flag whose default isn't `None` or `argparse.SUPPRESS`.
+- **Read lazily**: call `get_conf()` (or read `RenderContext.options`) inside the rule/renderer function itself, not inside `update_mdit`. mdformat runs extensions' `update_mdit` in an unguaranteed order, so a value captured there can be stale by the time every extension has finished configuring options.
 
 ### Testing Strategy
 
-**Snapshot Testing**
+**Fixture Testing**
 
-- Test fixtures in `tests/format/fixtures/` and `tests/render/fixtures/`
-- Main test file: `tests/test_mdformat.py` verifies idempotent formatting against `tests/pre-commit-test.md`
+- Fixture files (before/after markdown pairs) live in `tests/format/fixtures/` and `tests/render/fixtures/`, parsed with `markdown_it.utils.read_fixture_file`
+- `tests/test_mdformat.py` verifies idempotent formatting against `tests/pre-commit-test.md`
+- A downstream project may layer a snapshot library (e.g. syrupy) on top of these fixtures; check `pyproject.toml` before assuming `--snapshot-update` applies
 
 **Test Organization**
 
 - `tests/format/`: Tests formatting output (input markdown → formatted markdown)
 - `tests/render/`: Tests HTML rendering (markdown → HTML via markdown-it)
+- `tests/test_hypothesis.py`: Property-based idempotency testing over generated markdown documents
 
 ## Development Notes
 
