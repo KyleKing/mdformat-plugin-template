@@ -95,6 +95,8 @@ Configuration can be passed via:
 
 Boolean flags in `add_cli_argument_group` must use `action="store_const", const=True` (default `None`), never `action="store_true"` (default `False`). `get_conf()` treats a present-but-`False` value the same as an explicit user choice, so a `store_true` default silently overrides `cli_argument = true` set in `.mdformat.toml` whenever the CLI flag isn't passed. `mdformat`'s own CLI builder detects this and raises a `DeprecationWarning` for any plugin flag whose default isn't `None` or `argparse.SUPPRESS`.
 
+Read configuration values inside the rule/renderer function itself (e.g. call `get_conf()` from the markdown-it-py rule body, or from `RenderContext.options` in a `RENDERERS` function), not inside `update_mdit`. mdformat runs every installed extension's `update_mdit` in an order it does not guarantee, so a value read and closed over during `update_mdit` may be stale by the time a sibling extension, or the mdformat CLI/API caller, finishes configuring options. Reading at the point the rule actually runs avoids this, since by then every extension has finished registering and the options dict is final.
+
 ### Testing Strategy
 
 **Snapshot Testing**
