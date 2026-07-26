@@ -47,10 +47,11 @@ def _make_md() -> MarkdownIt:
 
 
 def _fixture_inputs() -> list[str]:
-    path = FIXTURE_PATH / "{{ plugin_name }}.md"
-    if not path.is_file():
-        return []
-    return [text for _line, _title, text, _expected in read_fixture_file(path)]
+    return [
+        text
+        for path in sorted(FIXTURE_PATH.glob("*.md"))
+        for _line, _title, text, _expected in read_fixture_file(path)
+    ]
 
 
 def _amplified(text: str, filler: str) -> str:

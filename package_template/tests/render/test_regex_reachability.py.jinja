@@ -19,7 +19,7 @@ import pytest
 from markdown_it.utils import read_fixture_file
 
 PACKAGE = Path(__file__).parents[2] / "mdformat_{{ plugin_name }}"
-FIXTURE_PATH = Path(__file__).parent / "fixtures" / "{{ plugin_name }}.md"
+FIXTURE_PATH = Path(__file__).parent / "fixtures"
 
 _RE_FUNCS = {"compile", "match", "search", "fullmatch", "findall", "finditer", "sub"}
 # Metacharacters that end the run of leading literal characters.
@@ -87,9 +87,11 @@ def _iter_regex_literals() -> list[tuple[str, str]]:
 
 
 def _fixture_corpus() -> str:
-    if not FIXTURE_PATH.is_file():
-        return ""
-    return "\n".join(text for _l, _t, text, _e in read_fixture_file(FIXTURE_PATH))
+    return "\n".join(
+        text
+        for path in sorted(FIXTURE_PATH.glob("*.md"))
+        for _l, _t, text, _e in read_fixture_file(path)
+    )
 
 
 _REGEX_LITERALS = _iter_regex_literals()

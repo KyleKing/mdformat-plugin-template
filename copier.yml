@@ -5,6 +5,7 @@ _min_copier_version: 9.0.0
 _answers_file: .copier-answers.yml
 _skip_if_exists:
   - scripts/canary_repos.json
+  - tests/render/test_security.py
 _subdirectory: package_template
 _tasks:
   - git init
