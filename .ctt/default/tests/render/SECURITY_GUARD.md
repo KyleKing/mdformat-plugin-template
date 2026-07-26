@@ -1,20 +1,19 @@
 # Maintaining the security guard
 
 `test_security.py` guards the render layer against ReDoS (catastrophic regex
-backtracking) and XSS (unescaped interpolation in default render rules). The open
-question is how to keep its payloads correct and complete as the plugin grows,
-without hand-maintaining a payload per regex.
+backtracking) and XSS (unescaped interpolation in default render rules). The
+question is how payloads stay complete as the plugin grows without hand-maintaining
+one per regex.
 
 ## The problem with hand-authored payloads
 
 A fixed list of adversarial strings rots: someone adds a regex or a render sink,
 the payload list doesn't grow with it, and the guard reports green while covering
-nothing. We want coverage to track the plugin automatically, and to *know* when it
-doesn't.
+nothing. Coverage should track the plugin automatically and report when it doesn't.
 
 ## Three layers, chosen by cost
 
-The guard has three layers because each catches a different failure mode.
+Each layer catches a different failure mode.
 
 1. **Behavioral guard, fixture-derived (default, always on).** `test_security.py`
    reads the plugin's own render fixtures and amplifies a homogeneous character run
@@ -25,15 +24,13 @@ The guard has three layers because each catches a different failure mode.
    tests a sink if it lands in that sink, which fixtures can't guarantee.
 
 2. **AST reachability check (default, always on, `test_regex_reachability.py`).**
-   The gap in layer 1 is silent: if a new regex is anchored past a lead-in that no
-   fixture produces (e.g. `` ^```math ``), the fuzz corpus never reaches it and the
-   miss is invisible. This test statically extracts every regex literal from the
-   plugin package, reconstructs each pattern's literal prefix, and asserts at least
-   one fixture-derived payload contains that prefix. It answers "are we fuzzing every
-   regex?" and names the ones we aren't. It runs in the normal `pytest` suite, so it
-   needs no new CI job. When it fails, add a fixture that exercises that syntax
-   (which also improves render coverage). This is the only
-   layer that measures completeness instead of assuming it.
+   Layer 1 fails silently: a regex anchored past a lead-in no fixture produces
+   (e.g. `` ^```math ``) never sees the fuzz corpus, and nothing reports the miss.
+   This test extracts every regex literal from the package, reconstructs each
+   pattern's literal prefix, and asserts some fixture-derived payload contains it.
+   It names any regex we aren't fuzzing and runs in the normal `pytest` suite. When
+   it fails, add a fixture for that syntax (which also improves render coverage).
+   This is the only layer that measures completeness instead of assuming it.
 
 3. **Hypothesis deep-fuzz (optional, opt-in profile).** Layers 1 and 2 only vary the
    *amplification* of known-shaped inputs. To explore unknown-shaped inputs, add a
@@ -47,8 +44,8 @@ The guard has three layers because each catches a different failure mode.
 
 ## Recommendation
 
-Keep layers 1 and 2 always on. Both are cheap, deterministic, and run in the existing
-`pytest` job. Add layer 3 only once the plugin's grammar is non-trivial and you want
-continuous exploration beyond the fixture set. Fixtures are the single source of
-truth: they drive the rendering tests, the ReDoS corpus, the reachability check, and
-the Hypothesis building blocks, so adding fixtures improves every layer at once.
+Keep layers 1 and 2 always on: cheap, deterministic, already in the `pytest` job.
+Add layer 3 once the grammar is non-trivial and you want exploration beyond the
+fixture set. Fixtures drive the rendering tests, the ReDoS corpus, the reachability
+check, and the Hypothesis building blocks, so adding one improves every layer at
+once.

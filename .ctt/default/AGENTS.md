@@ -48,7 +48,7 @@ tox -e canary
 tox -e canary -- some-repo another-repo
 ```
 
-Clones real consumer repos via git sparse checkout and runs a two-pass idempotency check: format once, format again, compare. Not part of the default `tox` run, invoke explicitly before releasing. Configure tracked repos in `scripts/canary_repos.json`.
+Clones real consumer repos via git sparse checkout and runs a two-pass idempotency check: format once, format again, compare. Not part of the default `tox` run, so invoke it before releasing. Configure tracked repos in `scripts/canary_repos.json`.
 
 ## Pre-commit Hook Testing
 
@@ -81,12 +81,12 @@ PYTHON
 
 ### Plugin System
 
-The package implements mdformat's plugin interface with up to four key exports in `__init__.py`:
+The package implements mdformat's plugin interface with up to four exports in `__init__.py`:
 
 - `update_mdit`: Registers markdown-it parser extensions
 - `add_cli_argument_group`: Optionally adds CLI flags
 - `RENDERERS`: Maps syntax tree node types to render functions
-- `POSTPROCESSORS`: Post-processes rendered output of a syntax node; multiple plugins can register a postprocessor for the same node type and they run in series
+- `POSTPROCESSORS`: Post-processes rendered output of a syntax node. Multiple plugins can register a postprocessor for the same node type, and they run in series
 
 ### Core Components
 
@@ -96,7 +96,7 @@ The package implements mdformat's plugin interface with up to four key exports i
 
 **mdformat_eb_plugin_example/\_synced/**
 
-- Code synced from other mdformat plugins in this project family (e.g. admonition factories); check the README in each subdirectory before modifying, since changes should flow back upstream
+- Code synced from other mdformat plugins in this family (e.g. admonition factories). Check each subdirectory's README before modifying, since changes flow back upstream
 
 ### Configuration Options
 
