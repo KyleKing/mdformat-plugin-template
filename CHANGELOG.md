@@ -1,3 +1,10 @@
+## 2.9.1 (2026-07-26)
+
+### Fix
+
+- **ci**: relax ReDoS timing test budget for CI flakiness
+- add AI guidance on store_true footgun
+
 ## 2.9.0 (2026-07-25)
 
 ### Feat
