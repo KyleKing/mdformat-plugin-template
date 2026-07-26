@@ -17,7 +17,8 @@ Two failure modes matter when a plugin renders untrusted markdown to HTML:
   plugin emits ``&lt;xss&gt;``).
 
 See `SECURITY_GUARD.md` for how to keep this corpus healthy (fixture coverage,
-the optional AST reachability check, and the optional Hypothesis deep-fuzz).
+the AST reachability check in `test_regex_reachability.py`, and the optional
+Hypothesis deep-fuzz).
 """
 
 from __future__ import annotations

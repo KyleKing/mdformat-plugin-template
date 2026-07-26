@@ -3,3 +3,4 @@
 tests/format/fixtures.md
 tests/format/test_fixtures.py
 tox.ini
+scripts/check_regex_reachability.py
