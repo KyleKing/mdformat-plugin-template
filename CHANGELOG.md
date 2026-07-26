@@ -1,3 +1,9 @@
+## 2.9.2 (2026-07-26)
+
+### Fix
+
+- handle templated file nuance
+
 ## 2.9.1 (2026-07-26)
 
 ### Fix
