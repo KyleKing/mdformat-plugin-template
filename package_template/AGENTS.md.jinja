@@ -112,8 +112,8 @@ Configuration can be passed via:
 
 Two footguns to avoid:
 
-- **`store_const`, not `store_true`**: boolean flags in `add_cli_argument_group` must use `action="store_const", const=True` (default `None`). A `store_true` default (`False`) is indistinguishable from an explicit choice to `get_conf()`, so it silently overrides `argument = true` from `.mdformat.toml` whenever the CLI flag isn't passed. mdformat's CLI builder raises a `DeprecationWarning` for any plugin flag whose default isn't `None` or `argparse.SUPPRESS`.
-- **Read lazily**: call `get_conf()` (or read `RenderContext.options`) inside the rule/renderer function itself, not inside `update_mdit`. mdformat runs extensions' `update_mdit` in an unguaranteed order, so a value captured there can be stale by the time every extension has finished configuring options.
+- Boolean flags in `add_cli_argument_group` must use `action="store_const", const=True` (default `None`), not `store_true`. A `store_true` default (`False`) is indistinguishable from an explicit choice to `get_conf()`, so it silently overrides `argument = true` from `.mdformat.toml` whenever the CLI flag isn't passed. mdformat's CLI builder raises a `DeprecationWarning` for any plugin flag whose default isn't `None` or `argparse.SUPPRESS`
+- Read config lazily. Call `get_conf()` (or read `RenderContext.options`) inside the rule/renderer function itself, not inside `update_mdit`. mdformat runs extensions' `update_mdit` in an unguaranteed order, so a value captured there can be stale by the time every extension has finished configuring options
 
 ### Testing Strategy
 
@@ -131,4 +131,4 @@ Two footguns to avoid:
 
 ## Development Notes
 
-- **Do not use `uv` commands**—there is no `uv.lock` file. Always use `tox` (installed via mise and available on PATH) which manages environments and dependencies.
+- Do not use `uv` commands (there is no `uv.lock` file). Always use `tox` (installed via mise and available on PATH), which manages environments and dependencies

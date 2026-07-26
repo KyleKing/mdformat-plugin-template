@@ -10,14 +10,14 @@ A collection of useful resources to reference when developing new features:
 
 ## Local Development
 
-This package utilizes [mise](https://mise.jdx.dev) ([installation guide](https://github.com/jdx/mise/blob/79367a4d382d8ab4cb76afef357d0db4afa33866/docs/installing-mise.md)) for dependency management, [prek](https://github.com/j178/prek) for fast pre-commit hooks, [uv](https://docs.astral.sh/uv) as the build engine, and [tox](https://tox.readthedocs.io) for test automation.
+This package uses [mise](https://mise.jdx.dev) ([installation guide](https://github.com/jdx/mise/blob/79367a4d382d8ab4cb76afef357d0db4afa33866/docs/installing-mise.md)) for dependency management, [prek](https://github.com/j178/prek) for fast pre-commit hooks, [uv](https://docs.astral.sh/uv) as the build engine, and [tox](https://tox.readthedocs.io) for test automation.
 
 To install the development dependencies:
 
 ```bash
 brew install mise  # or see the installation alternatives above
 
-# Install dependencies from mist.toml
+# Install dependencies from mise.toml
 mise trust
 mise install
 
@@ -78,7 +78,7 @@ This project uses [PyPI Trusted Publishers](https://docs.pypi.org/trusted-publis
 
 ### Initial Setup (One-time)
 
-Before publishing for the first time, you need to configure Trusted Publishing on PyPI:
+Before publishing for the first time, configure Trusted Publishing on PyPI:
 
 1. Go to your project's page on PyPI: `https://pypi.org/manage/project/mdformat_{{ plugin_name }}/settings/publishing/`
     - If the project doesn't exist yet, go to [PyPI's publishing page](https://pypi.org/manage/account/publishing) to add a "pending" publisher
@@ -111,4 +111,4 @@ tox -e cz -- --increment PATCH  # or MINOR or MAJOR
 git push origin main --tags
 ```
 
-The GitHub Action will automatically build and publish to PyPI using Trusted Publishers (no API tokens needed!).
+The GitHub Action builds and publishes to PyPI using Trusted Publishers (no API tokens needed).
