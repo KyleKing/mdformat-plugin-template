@@ -17,10 +17,18 @@ default_install_hook_types: ["commit-msg", "pre-commit", "pre-push"]
 exclude: CHANGELOG\.md|poetry\.lock
 
 repos:
-  - repo: https://github.com/kyleking/copier-template-tester
-    rev: 2.4.0b0
+  - repo: local
     hooks:
+      # Clearing and rendering are one hook on purpose: the clear step always
+      # deletes files, so as a separate hook it would report "files were
+      # modified" on every run and never converge. Bumping ctt is manual here
+      # because a local hook has no 'rev' for 'prek autoupdate' to update
       - id: copier-template-tester
+        name: Render ctt output, clearing _skip_if_exists first
+        entry: bash -c 'uv run --no-project clear_ctt_skipped.py && uv run --no-project --with copier-template-tester==2.4.0b0 ctt'
+        language: system
+        files: ^(copier\.yml|ctt\.toml|package_template/|\.ctt/)
+        pass_filenames: false
   - repo: local
     hooks:
       # Note: pre-commit hooks are tested here with 'sync_with_ctt.sh'
