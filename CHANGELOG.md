@@ -1,3 +1,11 @@
+## 2.9.3 (2026-07-27)
+
+### Fix
+
+- drive the security guard through the public plugin interface
+- decode control escapes when deriving a regex literal prefix
+- depend on pytest-timeout so the ReDoS guard enforces its budget
+
 ## 2.9.2 (2026-07-26)
 
 ### Fix
