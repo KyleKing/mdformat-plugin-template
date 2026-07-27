@@ -1,9 +1,21 @@
 # Maintaining the security guard
 
-`test_security.py` guards the render layer against ReDoS (catastrophic regex
-backtracking) and XSS (unescaped interpolation in default render rules). The
-question is how payloads stay complete as the plugin grows without hand-maintaining
-one per regex.
+`test_security.py` guards against ReDoS (catastrophic regex backtracking) and XSS
+(unescaped interpolation in default render rules). The question is how payloads
+stay complete as the plugin grows without hand-maintaining one per regex.
+
+## Plugins of every shape
+
+An mdformat plugin may ship markdown-it syntax, renderers, postprocessors, or any
+combination. A guard written against a markdown-it plugin symbol only fits the
+first kind, so this one goes through `update_mdit` and the plugin's mdformat
+extension name instead, both of which every plugin has.
+
+The consequence worth knowing: the ReDoS timing path calls `mdformat.text`, not
+`MarkdownIt.render`, because a postprocessor-only plugin contributes nothing to an
+HTML render and its regexes would never run. The XSS path does render HTML, since
+that is where an escaping bug shows up, and a plugin with no render rules has no
+such sink and keeps `_INJECTION_CASES` empty.
 
 ## The problem with hand-authored payloads
 
@@ -16,8 +28,8 @@ nothing. Coverage should track the plugin automatically and report when it doesn
 Each layer catches a different failure mode.
 
 1. **Behavioral guard, fixture-derived (default, always on).** `test_security.py`
-   reads the plugin's own render fixtures and amplifies a homogeneous character run
-   inside each one. Every fixture is a known-valid activation, so the amplified
+   reads the plugin's own render and format fixtures and amplifies a homogeneous
+   character run inside each one. Every fixture is a known-valid activation, so the amplified
    variant reaches the real regexes without naming them. Adding a fixture grows the
    fuzz corpus for free. This is the primary regression guard: fast, deterministic,
    no flakiness. XSS stays an explicit `_INJECTION_CASES` list, because a probe only
