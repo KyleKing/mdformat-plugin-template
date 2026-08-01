@@ -1,0 +1,17 @@
+# 2026-08-01
+
+Pre-existing uncommitted work was set aside before this freshen pass. It is stashed, not
+dropped and not applied. Recover it with:
+
+    git stash apply stash@{0}    # message: "freshen 672bb50f: pre-existing WIP"
+
+Stashed files:
+
+- doing.txt (staged, new file) — the fleet-wide follow-up log from the 2.9.2 and 2.9.3
+  rollouts. The 2026-07-27 section lists a second round that has not been started: seed
+  `options["mdformat"]` in `_make_md()` in package_template/tests/render/test_security.py.jinja
+  so plugins whose `update_mdit` reads that key stop raising KeyError, add uv.lock to the
+  template .gitignore, drop the `touch mise.lock` from `_tasks` that makes every child
+  produce a no-op mise.lock.rej, and fix AGENTS.md so it documents the rendered plugin's
+  real flags instead of the scaffolded `--argument`. Next step: restore this file, batch
+  those four template changes into one push, then run a single child pass to confirm.
