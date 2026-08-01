@@ -132,3 +132,7 @@ Two footguns to avoid:
 ## Development Notes
 
 - Do not use `uv` commands (there is no `uv.lock` file). Always use `tox` (installed via mise and available on PATH), which manages environments and dependencies
+
+This file is template-owned and `copier update` keeps it current. Put project-specific guidance in `AGENTS.local.md` (loaded below when present) or in a nested `AGENTS.md` scoped to its directory.
+
+@AGENTS.local.md
