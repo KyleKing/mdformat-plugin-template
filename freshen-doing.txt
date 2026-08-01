@@ -15,3 +15,17 @@ Stashed files:
   produce a no-op mise.lock.rej, and fix AGENTS.md so it documents the rendered plugin's
   real flags instead of the scaffolded `--argument`. Next step: restore this file, batch
   those four template changes into one push, then run a single child pass to confirm.
+
+Template items re-verified as still open on 2026-08-01, no action taken:
+
+- copier.yml:13 still runs `touch mise.lock` in `_tasks`, which is what gives every child a
+  no-op mise.lock.rej on update
+- package_template/.gitignore still has uv.lock commented out at line 105, so an accidental
+  `uv sync` writes a committable lock file
+- package_template/tests/render/test_security.py.jinja:62 still builds a bare
+  MarkdownIt("commonmark") with no seeded options["mdformat"]
+- package_template/AGENTS.md.jinja:105 still documents the scaffolded `--argument` flag
+- .pre-commit-config.yaml:8 still carries the stale `poetry run calcipy lint.pre-commit`
+  comment; this repo uses prek and uv
+- scripts/canary_repos.json still ships an empty repos list, so the `cz bump` canary guard is
+  a no-op in every child
