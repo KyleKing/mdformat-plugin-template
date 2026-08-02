@@ -3,6 +3,18 @@ _min_copier_version: 9.0.0
 
 # ====== TEMPLATE ======
 _answers_file: .copier-answers.yml
+# Setting '_exclude' replaces copier's built-in defaults, so they are re-listed here.
+# The last entry renders 'mdit_plugins.py' on first copy only: a project that grew its
+# own module at that path (or deleted the stub) must not have it written back on update.
+_exclude:
+  - "copier.yml"
+  - "~*"
+  - "*.py[co]"
+  - "__pycache__"
+  - ".git"
+  - ".DS_Store"
+  - ".svn"
+  - "{% if _copier_operation == 'update' %}mdformat_{{ plugin_name }}/mdit_plugins.py{% endif %}"
 _skip_if_exists:
   - scripts/canary_repos.json
   - tests/render/test_security.py
