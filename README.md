@@ -36,4 +36,4 @@ copier update . --UNSAFE --conflict=rej --defaults
 
 ## Releases
 
-Any push to the repository `main` branch will trigger a version bump based on [`commitizen` rules (`fix`, `feat`, etc.)](https://commitizen-tools.github.io/commitizen/)
+Any push to the repository `main` branch triggers a version bump based on [`commitizen` rules (`fix`, `feat`, etc.)](https://commitizen-tools.github.io/commitizen/)
