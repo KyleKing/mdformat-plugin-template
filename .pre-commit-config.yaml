@@ -25,7 +25,7 @@ repos:
       # because a local hook has no 'rev' for 'prek autoupdate' to update
       - id: copier-template-tester
         name: Render ctt output, clearing _skip_if_exists first
-        entry: bash -c 'uv run --no-project clear_ctt_skipped.py && uv run --no-project --with copier-template-tester==2.4.0b0 ctt'
+        entry: bash -c 'uv run --no-project clear_ctt_skipped.py && uv run --no-project --with copier-template-tester==2.4.0b0 ctt && git add .ctt'
         language: system
         files: ^(copier\.yml|ctt\.toml|package_template/|\.ctt/)
         pass_filenames: false

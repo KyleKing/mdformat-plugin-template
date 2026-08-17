@@ -13,9 +13,16 @@ does against a real project, so once such a file exists under `.ctt/` it is neve
 written again and the committed render drifts from `package_template/` silently.
 Removing the paths first makes every ctt run a clean render.
 
+A path staged for its first commit (not yet in HEAD) is also unstaged here. Without
+that, deleting it leaves the working tree byte-identical to HEAD for that path, and
+if it is the only dirty path in the repo, copier's local-template clone sees no
+uncommitted changes to snapshot and its internal `git commit` aborts with "nothing
+to commit", crashing the render before it can recreate the file.
+
 Run before `copier-template-tester`, never after.
 """
 
+import subprocess
 from pathlib import Path
 
 import tomlkit
@@ -41,6 +48,11 @@ def clear() -> None:
             path = directory / relative
             if path.is_file():
                 path.unlink()
+                subprocess.run(  # noqa: S603
+                    ["git", "rm", "--cached", "--ignore-unmatch", "--quiet", str(path)],
+                    cwd=_ROOT,
+                    check=True,
+                )
 
 
 if __name__ == "__main__":
