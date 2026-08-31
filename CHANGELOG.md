@@ -1,3 +1,15 @@
+## 2.10.0 (2026-08-31)
+
+### Feat
+
+- support per-repo mdformat extensions in canary scaffold
+- template-owned AGENTS.md with AGENTS.local.md for project guidance
+
+### Fix
+
+- keep skip_if_exists ctt paths staged across pre-commit renders
+- ship the mdit_plugins module the scaffold imports
+
 ## 2.9.3 (2026-07-27)
 
 ### Fix
