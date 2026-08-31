@@ -16,6 +16,9 @@ _exclude:
   - ".svn"
   - "{% if _copier_operation == 'update' %}mdformat_{{ plugin_name }}/mdit_plugins.py{% endif %}"
 _skip_if_exists:
+  # Every plugin writes its own README. Rendering it on update reset four children
+  # to the scaffold placeholder on 2026-08-31, wiping their real docs.
+  - README.md
   - scripts/canary_repos.json
   - tests/render/test_security.py
 _subdirectory: package_template
