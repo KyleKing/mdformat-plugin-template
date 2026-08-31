@@ -1,3 +1,9 @@
+## 2.10.1 (2026-08-31)
+
+### Fix
+
+- **copier**: stop overwriting a child's README on update
+
 ## 2.10.0 (2026-08-31)
 
 ### Feat
