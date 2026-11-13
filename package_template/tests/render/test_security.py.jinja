@@ -60,6 +60,8 @@ _BUDGET_SECONDS = 1.0  # Safe threshold relaxed for CI
 
 def _make_md() -> MarkdownIt:
     md = MarkdownIt("commonmark")
+    # `update_mdit` reads config through `get_conf`, which requires seeded options
+    md.options.update({"mdformat": {"plugin": {_EXTENSION: {}}}})
     update_mdit(md)
     return md
 

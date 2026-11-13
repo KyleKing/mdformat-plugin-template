@@ -29,3 +29,28 @@ Template items re-verified as still open on 2026-08-01, no action taken:
   comment; this repo uses prek and uv
 - scripts/canary_repos.json still ships an empty repos list, so the `cz bump` canary guard is
   a no-op in every child
+
+# 2026-11-08
+
+Shipped in the pending release (batches the second-round items plus classifiers):
+
+- `_make_md()` seeds `options["mdformat"]["plugin"][<ext>]` (ports mdformat-mkdocs's local fix)
+- `uv.lock` uncommented in package_template/.gitignore
+- `touch mise.lock` dropped from `_tasks`; stale empty .ctt/default/mise.lock removed
+- AGENTS.md points at `add_cli_argument_group` for the real flags instead of naming the
+  scaffolded `--argument` as if it were one
+- Classifiers now list Python 3.10-3.14 and OS Independent, matching calcipy_template
+- Stale poetry/pre-commit comment block and `poetry\.lock` exclude removed from the
+  root .pre-commit-config.yaml
+- mise python pins bumped to 3.10.22 / 3.14.10
+
+Left open deliberately:
+
+- scripts/canary_repos.json stays empty: canary is opt-in per project and main() already
+  prints a loud skip message, so the cz-bump guard is a disclosed no-op rather than silent
+- tests/format/fixtures exclusion from code-block formatting: the mdformat pre-commit hook
+  already excludes `tests/.+\.md`, which covers the admon incident
+- sync_with_ctt.sh keeps echoing the pre-commit sync steps instead of running them (deliberate)
+
+After the tag lands: copier-auto-update each mdformat-* child, resolve rejs, commit as
+`build: copier-auto-update`, push.
