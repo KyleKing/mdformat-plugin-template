@@ -6,8 +6,8 @@
 // copier update. .ctt/ renders carry the same literals and update with the
 // next sync, so they get no sites of their own.
 
-amends "package://github.com/kyleking/doneram/releases/download/v0.6.0/doneram@0.6.0#/Config.pkl"
-import "package://github.com/kyleking/doneram/releases/download/v0.6.0/doneram@0.6.0#/Config.pkl"
+amends "package://github.com/kyleking/doneram/releases/download/v0.6.1/doneram@0.6.1#/Config.pkl"
+import "package://github.com/kyleking/doneram/releases/download/v0.6.1/doneram@0.6.1#/Config.pkl"
 
 local freshnessYml = ".github/workflows/freshness.yml"
 local bumpYml = ".github/workflows/bump_version.yml"
