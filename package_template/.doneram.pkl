@@ -1,0 +1,12 @@
+// Version literals this project pins in files it owns, checked by doneram.
+//
+// Pins inside generated files (workflows, .pre-commit-config.yaml,
+// mkdocs.yml) are deliberately absent: mdformat-plugin-template tracks those and
+// they arrive here through a copier update, so patching them locally would
+// only make the next update a merge. What belongs here is everything this
+// project added itself, e.g. a declared dependency in pyproject.toml, a
+// tool in mise.toml, or a CDN URL in a template it wrote.
+
+amends "package://github.com/kyleking/doneram/releases/download/v0.6.0/doneram@0.6.0#/Config.pkl"
+
+tools = new {}
