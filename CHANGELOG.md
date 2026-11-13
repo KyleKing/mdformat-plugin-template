@@ -1,3 +1,9 @@
+## 2.11.0 (2026-11-13)
+
+### Feat
+
+- declare python classifiers and fix copier update friction
+
 ## 2.10.1 (2026-08-31)
 
 ### Fix
