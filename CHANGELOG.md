@@ -1,3 +1,9 @@
+## 2.12.0 (2026-11-13)
+
+### Feat
+
+- render doneram freshness instead of dependabot
+
 ## 2.11.0 (2026-11-13)
 
 ### Feat
